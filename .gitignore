@@ -1,0 +1,53 @@
+# Dependências
+node_modules/
+
+# Arquivos de build
+build/
+dist/
+out/
+*.log
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Arquivos de configuração
+npm-debug.log
+yarn-error.log
+
+# Cache e logs
+.pnp/
+.pnp.js
+*.pnp.js
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# Cobertura de teste
+coverage/
+
+# Arquivos temporários
+*.bak
+*.swp
+*~
+*.DS_Store
+*.orig
+
+# Dependências locais
+/.pnp/
+.pnp.js
+.pnp.cjs
+
+# VSCode
+.vscode/
+.idea/
+
+# Arquivos de configuração do sistema
+.DS_Store
+Thumbs.db
+
+# Configuração de desenvolvimento
+.eslintcache
+
