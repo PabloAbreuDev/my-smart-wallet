@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { ICreateUser } from "../use-cases/create-user.usecase";
+import { ICreateUserWithEmail } from "../use-cases/create-user-with-email";
 import { CreateUserRequestDTO } from "../dtos/create-user-dto/create-user-request.dto";
 
 export class UsersController {
     constructor(
-        private readonly createUserUseCase: ICreateUser
+        private readonly createUserUseCase: ICreateUserWithEmail
     ){}
 
      createUser = async (request: Request, response: Response) =>{

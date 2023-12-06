@@ -1,6 +1,7 @@
-import { ZodError, ZodType, z } from "zod"
-import { ValidationError } from "../errors/validation.error";
-import { AppError } from "../errors/application.error";
+import { ZodError, ZodType, z } from "zod";
+import { AppError } from "../config/errors/application.error";
+import { ValidationError } from "../config/errors/validation.error";
+
 
 
 export abstract class AbstractDTO<Schema extends ZodType>{
