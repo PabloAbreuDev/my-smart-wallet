@@ -1,18 +1,6 @@
-import { IUser } from "../../models/user";
+import { IUser } from "../mongodb/models/user";
 
 export type WithId<T> = { id: string } & T;
-
-export class DatabaseError extends Error {
-  constructor(message: string) {
-    super(message);
-  }
-}
-
-export class DatabaseValidationError extends DatabaseError {}
-
-export class DatabaseUnknownClientError extends DatabaseError {}
-
-export class DatabaseInternalError extends DatabaseError {}
 
 export interface BaseRepository<T> {
   create(data: Partial<T>): Promise<WithId<T>>;

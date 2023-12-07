@@ -1,6 +1,6 @@
 import { Schema, model, Document, MongooseError } from "mongoose";
 import bcrypt from "bcrypt";
-import { BaseModel } from "../data/repositories/default-mongodb-repository";
+import { BaseModel } from "../repositories/default-mongodb-repository";
 
 export interface IUser extends Document, BaseModel {
     firstName: string;
