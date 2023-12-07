@@ -1,14 +1,15 @@
 import { Schema, model, Document, MongooseError } from "mongoose";
 import bcrypt from "bcrypt";
+import { BaseModel } from "../data/repositories/default-mongodb-repository";
 
-interface IUser extends Document {
+export interface IUser extends Document, BaseModel {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
 }
 
-const userSchema = new Schema<IUser>({
+export const userSchema = new Schema<IUser>({
     firstName: { type: String, required: true, minlength: 3 },
     lastName: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true, unique: true },
