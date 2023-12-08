@@ -11,13 +11,14 @@ export default function responseError(
 
     if(error instanceof ValidationError){
         return response.status(error.statusCode).json({
-            status: 'error',
-            issues: error.issues
+            message: "Operation failed",
+            errors: error.issues.map((item)=>{
+                return item.message
+            }),
         })
     }
 
     return response.status(500).json({
-        status: 'error',
-        message: 'Internal server error'
+        message: error.message,
     })
 }

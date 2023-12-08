@@ -13,8 +13,8 @@ export const userSchema = new Schema<IUser>({
     firstName: { type: String, required: true, minlength: 3 },
     lastName: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
-});
+    password: { type: String, required: true , select: false}
+}, {toJSON: {virtuals: true}});
 
 userSchema.pre<IUser>("save", async function (next) {
     const user = this;

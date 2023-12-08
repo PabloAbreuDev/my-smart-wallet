@@ -2,17 +2,15 @@ import "reflect-metadata"
 import 'express-async-errors'
 import express, { Request, Response } from 'express'
 import responseError from "./middleware/response-error"
-import { UsersController } from "./controllers/users.controller"
 import { connectDatabase } from "./modules/mongodb"
-import { createUserWithEmail } from "./config/di/composition-root"
+import userRouter from "./routes/user-route"
 
 const app = express()
-const userController = new UsersController(createUserWithEmail)
+
 
 app.use(express.json())
-app.post("/users", userController.createUser)
+app.use("/users", userRouter)
 app.use(responseError)
-
 app.get("/", (req: Request, res: Response)=>{
     res.send("Hello World!")
 })
