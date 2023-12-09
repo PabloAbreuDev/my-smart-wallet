@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { IUserRepository } from "../../repositories";
+import { IUserRepository, WithId } from "../../repositories";
 import UserModel, { IUser } from "../models/user";
 import { DefaultMongoDBRepository } from "./default-mongodb-repository";
 
@@ -11,4 +11,9 @@ export class UserMongoDBRepository
   constructor(userModel = UserModel) {
     super(userModel);
   }
+  async verifyAccount(verifyCode: string): Promise<WithId<IUser>> {
+   const updated =  await UserModel.findOneAndUpdate({verifyCode, verified: false}, {verified: true, verifyCode: ""}, {new: true})
+   return updated?.toJSON()  as WithId<IUser>;
+  }
+  
 }

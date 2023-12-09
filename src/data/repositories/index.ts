@@ -16,4 +16,6 @@ export abstract class Repository<T> implements BaseRepository<T> {
   public abstract find(filter: Partial<T>): Promise<WithId<T>[]>;
 }
 
-export interface IUserRepository extends BaseRepository<IUser>{}
+export interface IUserRepository extends BaseRepository<IUser>{
+  verifyAccount(verifyCode: string): Promise<WithId<IUser>>
+}

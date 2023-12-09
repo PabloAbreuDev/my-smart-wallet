@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ValidationError } from "../config/errors/validation.error";
+import { ValidationError } from "../common/errors/validation.error";
 
 export default function responseError(
   error: Error,

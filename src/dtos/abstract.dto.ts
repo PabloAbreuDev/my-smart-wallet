@@ -1,6 +1,6 @@
 import { ZodError, ZodType, z } from "zod";
-import { AppError } from "../config/errors/application.error";
-import { ValidationError } from "../config/errors/validation.error";
+import { AppError } from "../common/errors/application.error";
+import { ValidationError } from "../common/errors/validation.error";
 
 
 
@@ -15,10 +15,6 @@ export abstract class AbstractDTO<Schema extends ZodType>{
 
     public getAll(): z.infer<Schema>{
         return this.data
-    }
-
-    public get<Key extends keyof z.infer<Schema>>(key: Key){
-        return this.data[key]
     }
 
     private validate(data:Record<string, unknown> ){
