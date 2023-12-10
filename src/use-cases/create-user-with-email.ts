@@ -1,61 +1,72 @@
 import { inject, injectable } from "inversify";
-import { IUserRepository } from "../data/repositories";
-import { CreateUserRequestDTO } from "../dtos/create-user-dto/create-user-request.dto";
-import { CreateUserResponseDTO } from "../dtos/create-user-dto/create-user-response.dto";
 import { TYPES } from "../common/di/types";
 import { AppError } from "../common/errors/application.error";
 import { ISendEmailUseCase } from "./send-email";
-import { welcome } from "../utils/emails/welcome";
+import { welcome } from "../utils/emails-templates/welcome";
 import { generateUUID } from "../utils/string";
+import UserModel from "../models/user";
+
+export interface ICreateUserWithEmailUseCaseRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export interface ICreateUserWithEmailUseCaseResponse {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 export interface ICreateUserWithEmailUseCase {
-  execute(data: CreateUserRequestDTO): Promise<CreateUserResponseDTO>;
+  execute(
+    data: ICreateUserWithEmailUseCaseRequest
+  ): Promise<ICreateUserWithEmailUseCaseResponse>;
 }
 
 @injectable()
 export class CreateUserWithEmailUseCase implements ICreateUserWithEmailUseCase {
   constructor(
-    @inject(TYPES.UserRepository)
-    private readonly userRepository: IUserRepository,
     @inject(TYPES.SendEmailUseCase)
     private readonly sendEmailUseCase: ISendEmailUseCase
   ) {}
 
-  async execute(data: CreateUserRequestDTO): Promise<CreateUserResponseDTO> {
-    const dataDTO = data.getAll();
-
-    const userExists = await this.userRepository.findOne({
-      email: dataDTO.email,
+  async execute(
+    data: ICreateUserWithEmailUseCaseRequest
+  ): Promise<ICreateUserWithEmailUseCaseResponse> {
+    const userExists = await UserModel.findOne({
+      email: data.email,
     });
 
     if (userExists) {
       throw new AppError("User already exists", 400);
     }
 
-    const verifyCode = generateUUID()
+    const verifyCode = generateUUID();
 
-    const newUser = await this.userRepository.create({
-      firstName: dataDTO.firstName,
-      lastName: dataDTO.lastName,
-      email: dataDTO.email,
-      password: dataDTO.password,
-      verifyCode: verifyCode
+    const newUser = await UserModel.create({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+      verifyCode: verifyCode,
     });
 
     try {
-      await this.sendEmailUseCase.execute(
-        dataDTO.email,
-        "Welcome to smart waller",
-        welcome(dataDTO.firstName, verifyCode)
-      );
+      await this.sendEmailUseCase.execute({
+        to: data.email,
+        subject: "Welcome to smart waller",
+        template: welcome(data.firstName, verifyCode),
+      });
     } catch (err) {
       console.log(err);
     }
 
-    return new CreateUserResponseDTO({
+    return {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-    });
+    };
   }
 }

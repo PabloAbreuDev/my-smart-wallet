@@ -1,26 +1,26 @@
-import { inject, injectable } from "inversify";
-import { TYPES } from "../common/di/types";
-import { IUserRepository } from "../data/repositories";
+import { injectable } from "inversify";
 import { AppError } from "../common/errors/application.error";
+import UserModel from "../models/user";
 
 export interface IConfirmAccountUseCase {
-    execute(verifyCode: string): Promise<boolean>
+  execute(verifyCode: string): Promise<boolean>;
 }
 
 @injectable()
 export class ConfirmAccountUseCase implements IConfirmAccountUseCase {
-    constructor(
-        @inject(TYPES.UserRepository)
-        private readonly userRepository: IUserRepository,
-      ) {}
-    
-    async execute(verifyCode: string): Promise<boolean> {
-       const userExist = await this.userRepository.findOne({verifyCode})
-       if(!userExist){
-        throw new AppError("Invalid verify code", 400)
-       }
-       const verifiedUser = await this.userRepository.verifyAccount(verifyCode)
+  constructor() {}
 
-       return !!verifiedUser
+  async execute(verifyCode: string): Promise<boolean> {
+    const userExist = await UserModel.findOne({ verifyCode });
+
+    if (!userExist) {
+      throw new AppError("Invalid verify code", 400);
     }
+
+    const verifiedUser = await UserModel.findByIdAndUpdate(userExist._id, {
+      verified: true,
+      verifyCode: "",
+    });
+    return !!verifiedUser;
+  }
 }

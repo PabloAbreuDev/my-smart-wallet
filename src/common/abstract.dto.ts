@@ -1,6 +1,6 @@
 import { ZodError, ZodType, z } from "zod";
-import { AppError } from "../common/errors/application.error";
-import { ValidationError } from "../common/errors/validation.error";
+import { AppError } from "./errors/application.error";
+import { ValidationError } from "./errors/validation.error";
 
 
 
