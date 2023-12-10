@@ -8,6 +8,6 @@ export async function connectDatabaseLoader() {
     return true;
   } catch (error) {
     console.log(error);
-    throw error; // Rejeita a Promise para que o chamador possa tratar o erro
+    throw error;
   }
 }

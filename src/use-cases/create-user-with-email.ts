@@ -1,28 +1,28 @@
-import { inject, injectable } from "inversify";
-import { TYPES } from "../common/di/types";
-import { AppError } from "../common/errors/application.error";
-import { ISendEmailUseCase } from "./send-email";
-import { welcome } from "../utils/emails-templates/welcome";
-import { generateUUID } from "../utils/string";
-import UserModel from "../models/user";
+import { inject, injectable } from 'inversify'
+import { TYPES } from '../common/di/types'
+import { AppError } from '../common/errors/application.error'
+import { ISendEmailUseCase } from './send-email'
+import { welcome } from '../utils/emails-templates/welcome'
+import { generateUUID } from '../utils/encrypt-decrypt'
+import User from '../models/user'
 
 export interface ICreateUserWithEmailUseCaseRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+  firstName: string
+  lastName: string
+  email: string
+  password: string
 }
 
 export interface ICreateUserWithEmailUseCaseResponse {
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName: string
+  lastName: string
+  email: string
 }
 
 export interface ICreateUserWithEmailUseCase {
   execute(
     data: ICreateUserWithEmailUseCaseRequest
-  ): Promise<ICreateUserWithEmailUseCaseResponse>;
+  ): Promise<ICreateUserWithEmailUseCaseResponse>
 }
 
 @injectable()
@@ -35,38 +35,38 @@ export class CreateUserWithEmailUseCase implements ICreateUserWithEmailUseCase {
   async execute(
     data: ICreateUserWithEmailUseCaseRequest
   ): Promise<ICreateUserWithEmailUseCaseResponse> {
-    const userExists = await UserModel.findOne({
-      email: data.email,
-    });
+    const userExists = await User.findOne({
+      email: data.email
+    })
 
     if (userExists) {
-      throw new AppError("User already exists", 400);
+      throw new AppError('User already exists', 400)
     }
 
-    const verifyCode = generateUUID();
+    const verifyCode = generateUUID()
 
-    const newUser = await UserModel.create({
+    const newUser = await User.create({
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       password: data.password,
-      verifyCode: verifyCode,
-    });
+      verifyCode: verifyCode
+    })
 
     try {
       await this.sendEmailUseCase.execute({
         to: data.email,
-        subject: "Welcome to smart waller",
-        template: welcome(data.firstName, verifyCode),
-      });
+        subject: 'Welcome to smart waller',
+        template: welcome(data.firstName, verifyCode)
+      })
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
 
     return {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
-      email: newUser.email,
-    };
+      email: newUser.email
+    }
   }
 }

@@ -14,5 +14,9 @@
             "user": "",
             "pass": ""
         }
+    },
+    "jwt": {
+        "secret": "",
+        "expiresIn": ""
     }
 }
