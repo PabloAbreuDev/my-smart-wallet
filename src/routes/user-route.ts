@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { UsersController } from '../controllers/users.controller'
 import {
   confirmAccount,
-  createDepot,
   createUserWithEmail,
   loginUseCase
 } from '../common/di/composition-root'

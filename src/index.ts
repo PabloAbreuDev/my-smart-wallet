@@ -6,12 +6,14 @@ import userRouter from './routes/user-route'
 import { errorHandler } from './middleware/error-handler'
 import depotRouter from './routes/depot-route'
 import { logger } from './utils/logger'
+import financialMovementRouter from './routes/financial-movimente-route'
 
 const app = express()
 
 app.use(express.json())
 app.use('/users', userRouter)
 app.use('/depots', depotRouter)
+app.use('/financial-movement', financialMovementRouter)
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
 })

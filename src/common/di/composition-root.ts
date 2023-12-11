@@ -1,5 +1,6 @@
 import { IConfirmAccountUseCase } from '../../use-cases/confirm-account'
 import { ICreateDepotUseCase } from '../../use-cases/create-depot'
+import { ICreateFinancialMovementUseCase } from '../../use-cases/create-financial-movement'
 import { ICreateUserWithEmailUseCase } from '../../use-cases/create-user-with-email'
 import { IDeleteDepotUseCase } from '../../use-cases/delete-depot'
 import { ILoginWithEmailUseCase } from '../../use-cases/login-with-email'
@@ -28,3 +29,8 @@ export const updateDepotUseCase = myContainer.get<IUpdateDepotUseCase>(
 export const deleteDepotUsecase = myContainer.get<IDeleteDepotUseCase>(
   TYPES.DeleteDepotUseCase
 )
+
+export const createFinancialMovementUseCase =
+  myContainer.get<ICreateFinancialMovementUseCase>(
+    TYPES.CreateFinancialMovementUseCase
+  )

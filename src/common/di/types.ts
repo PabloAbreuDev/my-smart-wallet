@@ -9,5 +9,8 @@ export const TYPES = {
   // Depot
   CreateDepotUseCase: Symbol.for('CreateDepotUseCase'),
   UpdateDepotUseCase: Symbol.for('UpdateDepotUseCase'),
-  DeleteDepotUseCase: Symbol.for('DeleteDepotUseCase')
+  DeleteDepotUseCase: Symbol.for('DeleteDepotUseCase'),
+
+  // Financial Movement
+  CreateFinancialMovementUseCase: Symbol.for('CreateFinancialMovementUseCase')
 }

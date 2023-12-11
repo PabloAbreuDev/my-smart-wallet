@@ -19,7 +19,7 @@ export const userSchema = new Schema<IUser>(
     verifyCode: { type: String, required: true },
     verified: { type: Boolean, default: false }
   },
-  { toJSON: { virtuals: true } }
+  { toJSON: { virtuals: true }, timestamps: true }
 )
 
 userSchema.pre<IUser>('save', async function (next) {
