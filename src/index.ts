@@ -5,6 +5,7 @@ import { connectDatabaseLoader } from './loaders/mongodb'
 import userRouter from './routes/user-route'
 import { errorHandler } from './middleware/error-handler'
 import depotRouter from './routes/depot-route'
+import { logger } from './utils/logger'
 
 const app = express()
 
@@ -21,5 +22,5 @@ const port = 3000
 
 app.listen(port, async () => {
   await connectDatabaseLoader()
-  console.log(`App is running on port ${port}`)
+  logger.info(`App is running on port ${port}`)
 })

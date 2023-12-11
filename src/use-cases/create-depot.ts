@@ -2,6 +2,7 @@ import { injectable } from 'inversify'
 import { AppError } from '../common/errors/application.error'
 import DepotModel from '../models/depot'
 import User from '../models/user'
+import { logger } from '../utils/logger'
 
 export interface ICreateDepotUseCaseRequest {
   name: string
@@ -44,7 +45,7 @@ export class CreateDepotUseCase implements ICreateDepotUseCase {
         user_id: newDepot.id
       }
     } catch (err) {
-      console.log(err)
+      logger.error(err)
       throw new AppError('Error creating depot', 400)
     }
   }

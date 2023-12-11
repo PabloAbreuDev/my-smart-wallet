@@ -23,5 +23,3 @@ export const environmentVariables = {
     expiresIn: String(config.get('jwt.expiresIn'))
   }
 }
-
-console.log(environmentVariables)

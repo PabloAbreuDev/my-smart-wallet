@@ -5,6 +5,7 @@ import { ISendEmailUseCase } from './send-email'
 import { welcome } from '../utils/emails-templates/welcome'
 import { generateUUID } from '../utils/encrypt-decrypt'
 import User from '../models/user'
+import { logger } from '../utils/logger'
 
 export interface ICreateUserWithEmailUseCaseRequest {
   firstName: string
@@ -60,7 +61,7 @@ export class CreateUserWithEmailUseCase implements ICreateUserWithEmailUseCase {
         template: welcome(data.firstName, verifyCode)
       })
     } catch (err) {
-      console.log(err)
+      logger.error(err)
     }
 
     return {

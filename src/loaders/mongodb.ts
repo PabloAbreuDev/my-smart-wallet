@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
-import { environmentVariables } from "../common/environment";
+import mongoose from 'mongoose'
+import { environmentVariables } from '../common/environment'
+import { logger } from '../utils/logger'
 
 export async function connectDatabaseLoader() {
   try {
-    await mongoose.connect(environmentVariables.database.urlConnection);
-    console.log("Database connected!");
-    return true;
+    await mongoose.connect(environmentVariables.database.urlConnection)
+    logger.info('Database connected!')
+    return true
   } catch (error) {
-    console.log(error);
-    throw error;
+    logger.error(error)
+    throw error
   }
 }
