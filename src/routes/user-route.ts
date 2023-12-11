@@ -13,7 +13,6 @@ const userRouter = Router()
 const userController = new UsersController(
   createUserWithEmail,
   confirmAccount,
-  createDepot,
   loginUseCase
 )
 userRouter.post(

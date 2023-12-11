@@ -45,6 +45,7 @@ export class CreateDepotUseCase implements ICreateDepotUseCase {
       }
     } catch (err) {
       console.log(err)
+      throw new AppError('Error creating depot', 400)
     }
   }
 }

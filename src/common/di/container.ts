@@ -20,6 +20,14 @@ import {
   ILoginWithEmailUseCase,
   LoginWithEmailUseCase
 } from '../../use-cases/login-with-email'
+import {
+  IUpdateDepotUseCase,
+  UpdateDepotUseCase
+} from '../../use-cases/update-depot'
+import {
+  DeleteDepotUseCase,
+  IDeleteDepotUseCase
+} from '../../use-cases/delete-depot'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -38,5 +46,13 @@ myContainer
 myContainer
   .bind<ILoginWithEmailUseCase>(TYPES.LoginUseCase)
   .to(LoginWithEmailUseCase)
+
+myContainer
+  .bind<IUpdateDepotUseCase>(TYPES.UpdateDepotUseCase)
+  .to(UpdateDepotUseCase)
+
+myContainer
+  .bind<IDeleteDepotUseCase>(TYPES.DeleteDepotUseCase)
+  .to(DeleteDepotUseCase)
 
 export default myContainer
