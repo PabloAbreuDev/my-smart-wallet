@@ -36,7 +36,6 @@ export class CreateFinancialMovementUseCase
     data: ICreateFinancialMovementUseCaseRequest
   ): Promise<ICreateFinancialMovementUseCaseResponse | undefined> {
     const userExist = await User.findById(data.user_id)
-    console.log(data)
 
     if (!userExist) {
       throw new AppError('User not found', 400)
