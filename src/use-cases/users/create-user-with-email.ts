@@ -1,11 +1,11 @@
 import { inject, injectable } from 'inversify'
-import { TYPES } from '../common/di/types'
-import { AppError } from '../common/errors/application.error'
-import { ISendEmailUseCase } from './send-email'
-import { welcome } from '../utils/emails-templates/welcome'
-import { generateUUID } from '../utils/encrypt-decrypt'
-import User from '../models/user'
-import { logger } from '../utils/logger'
+import { TYPES } from '../../common/di/types'
+import { AppError } from '../../common/errors/application.error'
+import User from '../../models/user'
+import { welcome } from '../../utils/emails-templates/welcome'
+import { generateUUID } from '../../utils/encrypt-decrypt'
+import { logger } from '../../utils/logger'
+import { ISendEmailUseCase } from '../send-email'
 
 export interface ICreateUserWithEmailUseCaseRequest {
   firstName: string

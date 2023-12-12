@@ -1,6 +1,6 @@
-import { AppError } from '../common/errors/application.error'
-import { compareHash, generateJwtToken } from '../utils/encrypt-decrypt'
-import User from '../models/user'
+import { AppError } from '../../common/errors/application.error'
+import { compareHash, generateJwtToken } from '../../utils/encrypt-decrypt'
+import User from '../../models/user'
 import { injectable } from 'inversify'
 
 export interface ILoginWithEmailUseCaseRequest {

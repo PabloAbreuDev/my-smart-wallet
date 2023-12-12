@@ -1,8 +1,5 @@
 import { Container } from 'inversify'
-import {
-  CreateUserWithEmailUseCase,
-  ICreateUserWithEmailUseCase
-} from '../../use-cases/create-user-with-email'
+
 import { TYPES } from './types'
 import {
   ISendEmailUseCase,
@@ -11,40 +8,55 @@ import {
 import {
   ConfirmAccountUseCase,
   IConfirmAccountUseCase
-} from '../../use-cases/confirm-account'
+} from '../../use-cases/users/confirm-account'
 import {
   CreateDepotUseCase,
   ICreateDepotUseCase
-} from '../../use-cases/create-depot'
+} from '../../use-cases/depots/create-depot'
 import {
   ILoginWithEmailUseCase,
   LoginWithEmailUseCase
-} from '../../use-cases/login-with-email'
+} from '../../use-cases/users/login-with-email'
 import {
   IUpdateDepotUseCase,
   UpdateDepotUseCase
-} from '../../use-cases/update-depot'
+} from '../../use-cases/depots/update-depot'
 import {
   DeleteDepotUseCase,
   IDeleteDepotUseCase
-} from '../../use-cases/delete-depot'
+} from '../../use-cases/depots/delete-depot'
 import {
   CreateFinancialMovementUseCase,
   ICreateFinancialMovementUseCase
-} from '../../use-cases/create-financial-movement'
+} from '../../use-cases/financial-movements/create-financial-movement'
 import {
   DeleteFinancialMovementUseCase,
   IDeleteFinancialMovementUseCase
-} from '../../use-cases/delete-financial-movement'
+} from '../../use-cases/financial-movements/delete-financial-movement'
 import {
   EditFinancialMovementUseCase,
   IEditFinancialMovementUseCase
-} from '../../use-cases/edit-financial-movement'
-import { GetDepotsUseCase, IGetDepotsUseCase } from '../../use-cases/get-depots'
+} from '../../use-cases/financial-movements/edit-financial-movement'
+import {
+  GetDepotsUseCase,
+  IGetDepotsUseCase
+} from '../../use-cases/depots/get-depots'
 import {
   GetFinancialMovementsUseCase,
   IGetFinancialMovementsUseCase
-} from '../../use-cases/get-financial-movements'
+} from '../../use-cases/financial-movements/get-financial-movements'
+import {
+  ICreateUserWithEmailUseCase,
+  CreateUserWithEmailUseCase
+} from '../../use-cases/users/create-user-with-email'
+import {
+  CreateCategoryUseCase,
+  ICreateCategoryUseCase
+} from '../../use-cases/categories/create-category'
+import {
+  IUpdateCategoryUseCase,
+  UpdateCategoryUseCase
+} from '../../use-cases/categories/update-category'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -89,5 +101,13 @@ myContainer.bind<IGetDepotsUseCase>(TYPES.GetDepotsUseCase).to(GetDepotsUseCase)
 myContainer
   .bind<IGetFinancialMovementsUseCase>(TYPES.GetFinancialMovementsUseCase)
   .to(GetFinancialMovementsUseCase)
+
+myContainer
+  .bind<ICreateCategoryUseCase>(TYPES.CreateCategoryUseCase)
+  .to(CreateCategoryUseCase)
+
+myContainer
+  .bind<IUpdateCategoryUseCase>(TYPES.UpdateCategoryUseCase)
+  .to(UpdateCategoryUseCase)
 
 export default myContainer

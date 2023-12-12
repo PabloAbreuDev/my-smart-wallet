@@ -2,14 +2,18 @@ import { z } from 'zod'
 
 export const editFinancialMovementRequestSchema = z
   .object({
-    description: z.string({
-      invalid_type_error: 'Description needs to be a string',
-      required_error: 'Description is required'
-    }),
-    amount: z.number({
-      invalid_type_error: 'Amount needs to be a number',
-      required_error: 'Amount is required'
-    }),
+    description: z
+      .string({
+        invalid_type_error: 'Description needs to be a string',
+        required_error: 'Description is required'
+      })
+      .min(1),
+    amount: z
+      .number({
+        invalid_type_error: 'Amount needs to be a number',
+        required_error: 'Amount is required'
+      })
+      .min(1),
     type: z.enum(['income', 'expense', 'transfer'], {
       required_error: 'Type is required',
       invalid_type_error: 'The enum possible is income, expense or transfer'

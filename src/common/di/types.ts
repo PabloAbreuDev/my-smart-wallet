@@ -16,5 +16,9 @@ export const TYPES = {
   CreateFinancialMovementUseCase: Symbol.for('CreateFinancialMovementUseCase'),
   DeleteFinancialMovementUseCase: Symbol.for('DeleteFinancialMovementUseCase'),
   EditFinancialMovementUseCase: Symbol.for('EditFinancialMovementUseCase'),
-  GetFinancialMovementsUseCase: Symbol.for('GetFinancialMovementsUseCase')
+  GetFinancialMovementsUseCase: Symbol.for('GetFinancialMovementsUseCase'),
+
+  // Category
+  CreateCategoryUseCase: Symbol.for('CreateCaregoryUseCase'),
+  UpdateCategoryUseCase: Symbol.for('UpdateCategoryUseCase')
 }

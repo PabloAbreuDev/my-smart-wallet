@@ -12,7 +12,7 @@ export interface IFinancialMovement extends Document {
 
 const FinancialMovementSchema = new Schema<IFinancialMovement>(
   {
-    user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+    user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     description: { type: String, required: true },
     amount: { type: Number, required: true },
     type: {
@@ -20,7 +20,7 @@ const FinancialMovementSchema = new Schema<IFinancialMovement>(
       enum: ['income', 'expense', 'transfer'],
       required: true
     },
-    source: { type: Schema.Types.ObjectId, ref: 'Depot' },
+    source: { type: Schema.Types.ObjectId, ref: 'Depot', required: true },
     destination: { type: Schema.Types.ObjectId, ref: 'Depot' },
     status: { type: String, enum: ['valid', 'invalid'], default: 'valid' }
   },

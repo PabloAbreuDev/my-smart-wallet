@@ -1,9 +1,9 @@
 import { injectable } from 'inversify'
-import { AppError } from '../common/errors/application.error'
+import { AppError } from '../../common/errors/application.error'
 import FinancialMovement, {
   IFinancialMovement
-} from '../models/financial-movement'
-import User from '../models/user'
+} from '../../models/financial-movement'
+import User from '../../models/user'
 
 export interface IGetFinancialMovementsUseCaseRequest {
   user_id: string

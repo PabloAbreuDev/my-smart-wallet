@@ -1,16 +1,18 @@
-import { IConfirmAccountUseCase } from '../../use-cases/confirm-account'
-import { ICreateDepotUseCase } from '../../use-cases/create-depot'
-import { ICreateFinancialMovementUseCase } from '../../use-cases/create-financial-movement'
-import { ICreateUserWithEmailUseCase } from '../../use-cases/create-user-with-email'
-import { IDeleteDepotUseCase } from '../../use-cases/delete-depot'
-import { IDeleteFinancialMovementUseCase } from '../../use-cases/delete-financial-movement'
-import { IEditFinancialMovementUseCase } from '../../use-cases/edit-financial-movement'
-import { IGetDepotsUseCase } from '../../use-cases/get-depots'
-import { IGetFinancialMovementsUseCase } from '../../use-cases/get-financial-movements'
-import { ILoginWithEmailUseCase } from '../../use-cases/login-with-email'
-import { IUpdateDepotUseCase } from '../../use-cases/update-depot'
+import { IConfirmAccountUseCase } from '../../use-cases/users/confirm-account'
+import { ICreateDepotUseCase } from '../../use-cases/depots/create-depot'
+import { ICreateFinancialMovementUseCase } from '../../use-cases/financial-movements/create-financial-movement'
+import { IDeleteDepotUseCase } from '../../use-cases/depots/delete-depot'
+import { IDeleteFinancialMovementUseCase } from '../../use-cases/financial-movements/delete-financial-movement'
+import { IEditFinancialMovementUseCase } from '../../use-cases/financial-movements/edit-financial-movement'
+import { IGetDepotsUseCase } from '../../use-cases/depots/get-depots'
+import { IGetFinancialMovementsUseCase } from '../../use-cases/financial-movements/get-financial-movements'
+import { ILoginWithEmailUseCase } from '../../use-cases/users/login-with-email'
+import { IUpdateDepotUseCase } from '../../use-cases/depots/update-depot'
 import myContainer from './container'
 import { TYPES } from './types'
+import { ICreateCategoryUseCase } from '../../use-cases/categories/create-category'
+import { IUpdateCategoryUseCase } from '../../use-cases/categories/update-category'
+import { ICreateUserWithEmailUseCase } from '../../use-cases/users/create-user-with-email'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -57,3 +59,11 @@ export const getFinancialMovementsUseCase =
   myContainer.get<IGetFinancialMovementsUseCase>(
     TYPES.GetFinancialMovementsUseCase
   )
+
+export const createCategoryUseCase = myContainer.get<ICreateCategoryUseCase>(
+  TYPES.CreateCategoryUseCase
+)
+
+export const updateCategoryUseCase = myContainer.get<IUpdateCategoryUseCase>(
+  TYPES.UpdateCategoryUseCase
+)

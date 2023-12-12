@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import { ICreateFinancialMovementUseCase } from '../use-cases/create-financial-movement'
-import { IDeleteFinancialMovementUseCase } from '../use-cases/delete-financial-movement'
-import { IEditFinancialMovementUseCase } from '../use-cases/edit-financial-movement'
-import { IGetFinancialMovementsUseCase } from '../use-cases/get-financial-movements'
+import { ICreateFinancialMovementUseCase } from '../use-cases/financial-movements/create-financial-movement'
+import { IDeleteFinancialMovementUseCase } from '../use-cases/financial-movements/delete-financial-movement'
+import { IEditFinancialMovementUseCase } from '../use-cases/financial-movements/edit-financial-movement'
+import { IGetFinancialMovementsUseCase } from '../use-cases/financial-movements/get-financial-movements'
 
 export class FinancialMovementsController {
   constructor(

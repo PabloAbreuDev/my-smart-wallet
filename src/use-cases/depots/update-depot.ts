@@ -1,7 +1,7 @@
 import { injectable } from 'inversify'
-import { AppError } from '../common/errors/application.error'
-import DepotModel from '../models/depot'
-import User from '../models/user'
+import { AppError } from '../../common/errors/application.error'
+import DepotModel from '../../models/depot'
+import User from '../../models/user'
 
 export interface IUpdateDepotUseCaseRequest {
   name: string
@@ -42,23 +42,23 @@ export class UpdateDepotUseCase implements IUpdateDepotUseCase {
       throw new AppError('Depot not found', 400)
     }
 
-    try {
-      await DepotModel.findByIdAndUpdate(
-        data.depot_id,
-        {
-          name: data.name,
-          description: data.description
-        },
-        { new: true }
-      )
-
-      return {
+    const updatedDepot = await DepotModel.findByIdAndUpdate(
+      data.depot_id,
+      {
         name: data.name,
-        description: data.description,
-        user_id: data.user_id
-      }
-    } catch (err) {
+        description: data.description
+      },
+      { new: true }
+    )
+
+    if (!updatedDepot) {
       throw new AppError('Error updating depot', 400)
+    }
+
+    return {
+      name: updatedDepot.name,
+      description: updatedDepot.description,
+      user_id: updatedDepot.user_id._id.toString()
     }
   }
 }

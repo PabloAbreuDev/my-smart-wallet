@@ -1,7 +1,7 @@
 import { injectable } from 'inversify'
-import { AppError } from '../common/errors/application.error'
-import User from '../models/user'
-import DepotModel, { IDepot } from '../models/depot'
+import { AppError } from '../../common/errors/application.error'
+import User from '../../models/user'
+import DepotModel, { IDepot } from '../../models/depot'
 
 export interface IGetDepotsUseCaseRequest {
   user_id: string

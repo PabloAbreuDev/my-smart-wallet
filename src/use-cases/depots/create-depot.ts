@@ -1,8 +1,8 @@
 import { injectable } from 'inversify'
-import { AppError } from '../common/errors/application.error'
-import DepotModel from '../models/depot'
-import User from '../models/user'
-import { logger } from '../utils/logger'
+import { AppError } from '../../common/errors/application.error'
+import DepotModel from '../../models/depot'
+import User from '../../models/user'
+import { logger } from '../../utils/logger'
 
 export interface ICreateDepotUseCaseRequest {
   name: string

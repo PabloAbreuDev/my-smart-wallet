@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import DepotModel from '../models/depot'
+import DepotModel from '../../models/depot'
 
 export interface IDeleteDepotUseCaseRequest {
   depot_id: string

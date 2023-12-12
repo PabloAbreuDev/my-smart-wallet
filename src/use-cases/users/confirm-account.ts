@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
-import { AppError } from '../common/errors/application.error'
-import User from '../models/user'
+import { AppError } from '../../common/errors/application.error'
+import User from '../../models/user'
 
 export interface IConfirmAccountUseCase {
   execute(verifyCode: string): Promise<boolean>

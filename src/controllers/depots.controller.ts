@@ -1,8 +1,8 @@
-import { ICreateDepotUseCase } from '../use-cases/create-depot'
+import { ICreateDepotUseCase } from '../use-cases/depots/create-depot'
 import { Request, Response } from 'express'
-import { IUpdateDepotUseCase } from '../use-cases/update-depot'
-import { IDeleteDepotUseCase } from '../use-cases/delete-depot'
-import { IGetDepotsUseCase } from '../use-cases/get-depots'
+import { IUpdateDepotUseCase } from '../use-cases/depots/update-depot'
+import { IDeleteDepotUseCase } from '../use-cases/depots/delete-depot'
+import { IGetDepotsUseCase } from '../use-cases/depots/get-depots'
 
 export class DepotsController {
   constructor(

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import { ICreateUserWithEmailUseCase } from '../use-cases/create-user-with-email'
-import { IConfirmAccountUseCase } from '../use-cases/confirm-account'
-import { ILoginWithEmailUseCase } from '../use-cases/login-with-email'
+import { IConfirmAccountUseCase } from '../use-cases/users/confirm-account'
+import { ILoginWithEmailUseCase } from '../use-cases/users/login-with-email'
+import { ICreateUserWithEmailUseCase } from '../use-cases/users/create-user-with-email'
 
 export class UsersController {
   constructor(
