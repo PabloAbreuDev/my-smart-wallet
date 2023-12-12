@@ -14,6 +14,7 @@ import { ICreateCategoryUseCase } from '../../use-cases/categories/create-catego
 import { IUpdateCategoryUseCase } from '../../use-cases/categories/update-category'
 import { ICreateUserWithEmailUseCase } from '../../use-cases/users/create-user-with-email'
 import { IDeleteCategoryUseCase } from '../../use-cases/categories/delete-category'
+import { IGetCategoriesUseCase } from '../../use-cases/categories/get-categories'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -71,4 +72,8 @@ export const updateCategoryUseCase = myContainer.get<IUpdateCategoryUseCase>(
 
 export const deleteCategoryUseCase = myContainer.get<IDeleteCategoryUseCase>(
   TYPES.DeleteCategoryUseCase
+)
+
+export const getCategoriesUseCase = myContainer.get<IGetCategoriesUseCase>(
+  TYPES.GetCategoriesUseCase
 )

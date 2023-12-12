@@ -61,6 +61,10 @@ import {
   DeleteCategoryUseCase,
   IDeleteCategoryUseCase
 } from '../../use-cases/categories/delete-category'
+import {
+  GetCategoriesUseCase,
+  IGetCategoriesUseCase
+} from '../../use-cases/categories/get-categories'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -117,5 +121,9 @@ myContainer
 myContainer
   .bind<IDeleteCategoryUseCase>(TYPES.DeleteCategoryUseCase)
   .to(DeleteCategoryUseCase)
+
+myContainer
+  .bind<IGetCategoriesUseCase>(TYPES.GetCategoriesUseCase)
+  .to(GetCategoriesUseCase)
 
 export default myContainer

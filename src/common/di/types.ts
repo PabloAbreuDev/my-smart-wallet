@@ -21,5 +21,6 @@ export const TYPES = {
   // Category
   CreateCategoryUseCase: Symbol.for('CreateCaregoryUseCase'),
   UpdateCategoryUseCase: Symbol.for('UpdateCategoryUseCase'),
-  DeleteCategoryUseCase: Symbol.for('DeleteCategoryUseCase')
+  DeleteCategoryUseCase: Symbol.for('DeleteCategoryUseCase'),
+  GetCategoriesUseCase: Symbol.for('GetCategoriesUseCase')
 }

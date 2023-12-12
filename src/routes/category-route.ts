@@ -3,6 +3,7 @@ import { CategoriesController } from '../controllers/categories.controller'
 import {
   createCategoryUseCase,
   deleteCategoryUseCase,
+  getCategoriesUseCase,
   updateCategoryUseCase
 } from '../common/di/composition-root'
 import { auth } from '../middleware/auth'
@@ -15,7 +16,8 @@ const categoryRouter = Router()
 const categoryController = new CategoriesController(
   createCategoryUseCase,
   updateCategoryUseCase,
-  deleteCategoryUseCase
+  deleteCategoryUseCase,
+  getCategoriesUseCase
 )
 
 categoryRouter.post(
@@ -33,5 +35,7 @@ categoryRouter.put(
 )
 
 categoryRouter.delete('/:id', auth, categoryController.deleteCategory)
+
+categoryRouter.get('/', auth, categoryController.getCategories)
 
 export default categoryRouter

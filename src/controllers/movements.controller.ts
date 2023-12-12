@@ -42,7 +42,6 @@ export class FinancialMovementsController {
       description: request.body.description,
       user_id: request.user,
       movement_id: request.params.id,
-      status: request.body.status,
       categories: request.body.categories
     })
     return response.status(200).json(result)
