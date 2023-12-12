@@ -33,18 +33,16 @@ export class DeleteFinancialMovementUseCase
     }
 
     try {
-      const deletedMovement = await FinancialMovement.findOneAndUpdate(
-        { _id: data.movement_id, user_id: data.user_id },
-        {
-          status: 'invalid'
-        }
-      )
+      const deletedMovement = await FinancialMovement.findOneAndDelete({
+        _id: data.movement_id,
+        user_id: data.user_id
+      })
 
       if (!deletedMovement) {
-        throw new AppError('Movement not found or could not be updated', 404)
+        throw new AppError('Movement not found or could not be deleted', 404)
       }
 
-      return { removed: !!deletedMovement }
+      return { removed: true }
     } catch (err) {
       logger.error(err)
       throw new AppError('Error deleting movement', 400)

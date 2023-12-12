@@ -26,7 +26,8 @@ export const editFinancialMovementRequestSchema = z
       .string({
         invalid_type_error: 'Destination needs to be a string'
       })
-      .optional()
+      .optional(),
+    categories: z.array(z.string()).optional()
   })
   .refine(
     data => {

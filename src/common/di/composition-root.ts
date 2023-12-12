@@ -13,6 +13,7 @@ import { TYPES } from './types'
 import { ICreateCategoryUseCase } from '../../use-cases/categories/create-category'
 import { IUpdateCategoryUseCase } from '../../use-cases/categories/update-category'
 import { ICreateUserWithEmailUseCase } from '../../use-cases/users/create-user-with-email'
+import { IDeleteCategoryUseCase } from '../../use-cases/categories/delete-category'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -66,4 +67,8 @@ export const createCategoryUseCase = myContainer.get<ICreateCategoryUseCase>(
 
 export const updateCategoryUseCase = myContainer.get<IUpdateCategoryUseCase>(
   TYPES.UpdateCategoryUseCase
+)
+
+export const deleteCategoryUseCase = myContainer.get<IDeleteCategoryUseCase>(
+  TYPES.DeleteCategoryUseCase
 )

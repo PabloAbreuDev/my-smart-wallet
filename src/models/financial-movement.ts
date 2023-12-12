@@ -7,7 +7,7 @@ export interface IFinancialMovement extends Document {
   type: 'income' | 'expense' | 'transfer'
   source?: Types.ObjectId
   destination?: Types.ObjectId
-  status: 'valid' | 'invalid'
+  categories: Types.ObjectId[]
 }
 
 const FinancialMovementSchema = new Schema<IFinancialMovement>(
@@ -22,7 +22,7 @@ const FinancialMovementSchema = new Schema<IFinancialMovement>(
     },
     source: { type: Schema.Types.ObjectId, ref: 'Depot', required: true },
     destination: { type: Schema.Types.ObjectId, ref: 'Depot' },
-    status: { type: String, enum: ['valid', 'invalid'], default: 'valid' }
+    categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
   },
   { toJSON: { virtuals: true }, timestamps: true }
 )

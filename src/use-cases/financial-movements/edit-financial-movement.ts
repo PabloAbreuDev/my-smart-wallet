@@ -2,7 +2,7 @@ import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
 import FinancialMovement from '../../models/financial-movement'
 import User from '../../models/user'
-import { logger } from '../../utils/logger'
+import Category from '../../models/category'
 
 export interface IEditFinancialMovementUseCaseRequest {
   movement_id: string
@@ -10,9 +10,9 @@ export interface IEditFinancialMovementUseCaseRequest {
   description: string
   amount: number
   type: 'income' | 'expense' | 'transfer'
-  status: 'valid' | 'invalid'
   source?: string
   destination?: string
+  categories?: string[]
 }
 
 export interface IEditFinancialMovementUseCaseResponse {
@@ -23,6 +23,7 @@ export interface IEditFinancialMovementUseCaseResponse {
   type: 'income' | 'expense' | 'transfer'
   source?: string
   destination?: string
+  categories?: string[]
 }
 
 export interface IEditFinancialMovementUseCase {
@@ -44,16 +45,32 @@ export class EditFinancialMovementUseCase
       throw new AppError('User not found', 400)
     }
 
+    if (data.categories && data.categories.length > 0) {
+      await Promise.all(
+        data.categories.map(async item => {
+          const categoryExist = await Category.findOne({
+            _id: item,
+            user_id: data.user_id
+          })
+
+          if (!categoryExist) {
+            throw new AppError('Invalid category', 400)
+          }
+        })
+      )
+    }
+
     const editedFinancialMovement = await FinancialMovement.findOneAndUpdate(
       { _id: data.movement_id, user_id: data.user_id },
       {
-        status: data.status,
         description: data.description,
         amount: data.amount,
         type: data.type,
         source: data.source,
-        destination: data.destination
-      }
+        destination: data.destination,
+        categories: data.categories ? [...new Set(data.categories)] : []
+      },
+      { new: true }
     )
 
     if (!editedFinancialMovement) {
@@ -67,7 +84,10 @@ export class EditFinancialMovementUseCase
       amount: editedFinancialMovement.amount,
       type: editedFinancialMovement.type,
       source: editedFinancialMovement.source?._id.toString(),
-      destination: editedFinancialMovement.destination?._id.toString()
+      destination: editedFinancialMovement.destination?._id.toString(),
+      categories: editedFinancialMovement.categories.map(item =>
+        item._id.toString()
+      )
     }
   }
 }

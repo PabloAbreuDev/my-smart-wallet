@@ -12,10 +12,12 @@ import categoryRouter from './routes/category-route'
 const app = express()
 
 app.use(express.json())
+
 app.use('/users', userRouter)
 app.use('/depots', depotRouter)
 app.use('/financial-movement', financialMovementRouter)
 app.use('/categories', categoryRouter)
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
 })

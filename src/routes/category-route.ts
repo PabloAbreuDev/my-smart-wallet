@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { CategoriesController } from '../controllers/categories.controller'
 import {
   createCategoryUseCase,
+  deleteCategoryUseCase,
   updateCategoryUseCase
 } from '../common/di/composition-root'
 import { auth } from '../middleware/auth'
@@ -13,7 +14,8 @@ const categoryRouter = Router()
 
 const categoryController = new CategoriesController(
   createCategoryUseCase,
-  updateCategoryUseCase
+  updateCategoryUseCase,
+  deleteCategoryUseCase
 )
 
 categoryRouter.post(
@@ -29,5 +31,7 @@ categoryRouter.put(
   validateRequest(updateCategoryRequestSchema),
   categoryController.updateCategory
 )
+
+categoryRouter.delete('/:id', auth, categoryController.deleteCategory)
 
 export default categoryRouter

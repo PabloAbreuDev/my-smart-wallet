@@ -32,7 +32,10 @@ export class UpdateCategoryUseCase implements IUpdateCategoryUseCase {
       throw new AppError('User not found', 400)
     }
 
-    const categoryExist = await Category.findById(data.category_id)
+    const categoryExist = await Category.findOne({
+      _id: data.category_id,
+      user_id: data.user_id
+    })
 
     if (!categoryExist) {
       throw new AppError('Category not found', 400)
