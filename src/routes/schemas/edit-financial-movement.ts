@@ -1,6 +1,6 @@
-import { Schema, ZodError, z } from 'zod'
+import { z } from 'zod'
 
-export const createFinancialMovementRequestSchema = z
+export const editFinancialMovementRequestSchema = z
   .object({
     description: z.string({
       invalid_type_error: 'Description needs to be a string',

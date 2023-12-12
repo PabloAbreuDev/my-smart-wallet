@@ -13,5 +13,6 @@ export const TYPES = {
 
   // Financial Movement
   CreateFinancialMovementUseCase: Symbol.for('CreateFinancialMovementUseCase'),
-  DeleteFinancialMovementUseCase: Symbol.for('DeleteFinancialMovementUseCase')
+  DeleteFinancialMovementUseCase: Symbol.for('DeleteFinancialMovementUseCase'),
+  EditFinancialMovementUseCase: Symbol.for('EditFinancialMovementUseCase')
 }

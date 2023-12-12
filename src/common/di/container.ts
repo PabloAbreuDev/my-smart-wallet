@@ -36,6 +36,10 @@ import {
   DeleteFinancialMovementUseCase,
   IDeleteFinancialMovementUseCase
 } from '../../use-cases/delete-financial-movement'
+import {
+  EditFinancialMovementUseCase,
+  IEditFinancialMovementUseCase
+} from '../../use-cases/edit-financial-movement'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -70,5 +74,9 @@ myContainer
 myContainer
   .bind<IDeleteFinancialMovementUseCase>(TYPES.DeleteFinancialMovementUseCase)
   .to(DeleteFinancialMovementUseCase)
+
+myContainer
+  .bind<IEditFinancialMovementUseCase>(TYPES.EditFinancialMovementUseCase)
+  .to(EditFinancialMovementUseCase)
 
 export default myContainer
