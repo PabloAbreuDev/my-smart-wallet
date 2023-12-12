@@ -3,6 +3,7 @@ import { DepotsController } from '../controllers/depots.controller'
 import {
   createDepot,
   deleteDepotUsecase,
+  getDepotsUseCase,
   updateDepotUseCase
 } from '../common/di/composition-root'
 import { auth } from '../middleware/auth'
@@ -14,7 +15,8 @@ const depotRouter = Router()
 const depotController = new DepotsController(
   createDepot,
   updateDepotUseCase,
-  deleteDepotUsecase
+  deleteDepotUsecase,
+  getDepotsUseCase
 )
 depotRouter.post(
   '/',
@@ -29,4 +31,5 @@ depotRouter.put(
   depotController.updateDepot
 )
 depotRouter.delete('/:id', auth, depotController.deleteDepot)
+depotRouter.get('/', auth, depotController.getDepots)
 export default depotRouter

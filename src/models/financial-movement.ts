@@ -1,6 +1,6 @@
 import { Schema, Types, model } from 'mongoose'
 
-interface IFinancialMovement extends Document {
+export interface IFinancialMovement extends Document {
   user_id: Types.ObjectId
   description: string
   amount: number

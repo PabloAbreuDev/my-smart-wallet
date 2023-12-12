@@ -2,7 +2,8 @@ import { Router } from 'express'
 import {
   createFinancialMovementUseCase,
   deleteFinancialMovementUseCase,
-  editFinancialMovementUseCase
+  editFinancialMovementUseCase,
+  getFinancialMovementsUseCase
 } from '../common/di/composition-root'
 import { FinancialMovementsController } from '../controllers/movements.controller'
 import { auth } from '../middleware/auth'
@@ -15,7 +16,8 @@ const financialMovementRouter = Router()
 const financialMovementController = new FinancialMovementsController(
   createFinancialMovementUseCase,
   deleteFinancialMovementUseCase,
-  editFinancialMovementUseCase
+  editFinancialMovementUseCase,
+  getFinancialMovementsUseCase
 )
 
 financialMovementRouter.post(
@@ -36,6 +38,12 @@ financialMovementRouter.put(
   auth,
   validateRequest(editFinancialMovementRequestSchema),
   financialMovementController.editFinancialMovement
+)
+
+financialMovementRouter.get(
+  '/',
+  auth,
+  financialMovementController.getFinancialMovemenets
 )
 
 export default financialMovementRouter
