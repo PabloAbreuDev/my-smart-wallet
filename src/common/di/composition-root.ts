@@ -15,6 +15,10 @@ import { IUpdateCategoryUseCase } from '../../use-cases/categories/update-catego
 import { ICreateUserWithEmailUseCase } from '../../use-cases/users/create-user-with-email'
 import { IDeleteCategoryUseCase } from '../../use-cases/categories/delete-category'
 import { IGetCategoriesUseCase } from '../../use-cases/categories/get-categories'
+import { ICreateBudgetUseCase } from '../../use-cases/budgets/create-budget'
+import { IUpdateBudgetUseCase } from '../../use-cases/budgets/update-budget'
+import { IDeleteBudgetUseCase } from '../../use-cases/budgets/delete-budget'
+import { IGetBudgetsUseCase } from '../../use-cases/budgets/get-budgets'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -76,4 +80,20 @@ export const deleteCategoryUseCase = myContainer.get<IDeleteCategoryUseCase>(
 
 export const getCategoriesUseCase = myContainer.get<IGetCategoriesUseCase>(
   TYPES.GetCategoriesUseCase
+)
+
+export const createBudgetUseCase = myContainer.get<ICreateBudgetUseCase>(
+  TYPES.CreateBudgetUseCase
+)
+
+export const updateBudgetUseCase = myContainer.get<IUpdateBudgetUseCase>(
+  TYPES.UpdateBudgetUseCase
+)
+
+export const deleteBudgetUseCase = myContainer.get<IDeleteBudgetUseCase>(
+  TYPES.DeleteBudgetUseCase
+)
+
+export const getBudgetsUseCase = myContainer.get<IGetBudgetsUseCase>(
+  TYPES.GetBudgetsUseCase
 )

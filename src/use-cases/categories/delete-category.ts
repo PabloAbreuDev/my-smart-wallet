@@ -49,7 +49,5 @@ export class DeleteCategoryUseCase implements IDeleteCategoryUseCase {
     }
 
     return { removed: true }
-
-    throw new Error('Method not implemented.')
   }
 }

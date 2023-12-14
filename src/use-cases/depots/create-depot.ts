@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
-import DepotModel from '../../models/depot'
+import Depot from '../../models/depot'
 import User from '../../models/user'
 import { logger } from '../../utils/logger'
 
@@ -33,7 +33,7 @@ export class CreateDepotUseCase implements ICreateDepotUseCase {
     }
 
     try {
-      const newDepot = await DepotModel.create({
+      const newDepot = await Depot.create({
         name: data.name,
         description: data.description,
         user_id: data.user_id

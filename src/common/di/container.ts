@@ -65,6 +65,22 @@ import {
   GetCategoriesUseCase,
   IGetCategoriesUseCase
 } from '../../use-cases/categories/get-categories'
+import {
+  CreateBudgetUseCase,
+  ICreateBudgetUseCase
+} from '../../use-cases/budgets/create-budget'
+import {
+  IUpdateBudgetUseCase,
+  UpdateBudgetUseCase
+} from '../../use-cases/budgets/update-budget'
+import {
+  DeleteBudgetUseCase,
+  IDeleteBudgetUseCase
+} from '../../use-cases/budgets/delete-budget'
+import {
+  GetBudgetsUseCase,
+  IGetBudgetsUseCase
+} from '../../use-cases/budgets/get-budgets'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -125,5 +141,21 @@ myContainer
 myContainer
   .bind<IGetCategoriesUseCase>(TYPES.GetCategoriesUseCase)
   .to(GetCategoriesUseCase)
+
+myContainer
+  .bind<ICreateBudgetUseCase>(TYPES.CreateBudgetUseCase)
+  .to(CreateBudgetUseCase)
+
+myContainer
+  .bind<IUpdateBudgetUseCase>(TYPES.UpdateBudgetUseCase)
+  .to(UpdateBudgetUseCase)
+
+myContainer
+  .bind<IDeleteBudgetUseCase>(TYPES.DeleteBudgetUseCase)
+  .to(DeleteBudgetUseCase)
+
+myContainer
+  .bind<IGetBudgetsUseCase>(TYPES.GetBudgetsUseCase)
+  .to(GetBudgetsUseCase)
 
 export default myContainer

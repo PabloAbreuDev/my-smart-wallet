@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
-import DepotModel from '../../models/depot'
+import Depot from '../../models/depot'
 import User from '../../models/user'
 
 export interface IUpdateDepotUseCaseRequest {
@@ -33,7 +33,7 @@ export class UpdateDepotUseCase implements IUpdateDepotUseCase {
       throw new AppError('User not found', 400)
     }
 
-    const depotExist = await DepotModel.findOne({
+    const depotExist = await Depot.findOne({
       user_id: data.user_id,
       _id: data.depot_id
     })
@@ -42,7 +42,7 @@ export class UpdateDepotUseCase implements IUpdateDepotUseCase {
       throw new AppError('Depot not found', 400)
     }
 
-    const updatedDepot = await DepotModel.findByIdAndUpdate(
+    const updatedDepot = await Depot.findByIdAndUpdate(
       data.depot_id,
       {
         name: data.name,

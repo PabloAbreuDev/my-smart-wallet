@@ -15,6 +15,6 @@ export const depotSchema = new Schema<IDepot>(
   { toJSON: { virtuals: true }, timestamps: true }
 )
 
-const DepotModel = model<IDepot>('Depot', depotSchema)
+const Depot = model<IDepot>('Depot', depotSchema)
 
-export default DepotModel
+export default Depot

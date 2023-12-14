@@ -8,6 +8,7 @@ import depotRouter from './routes/depot-route'
 import { logger } from './utils/logger'
 import financialMovementRouter from './routes/financial-movimente-route'
 import categoryRouter from './routes/category-route'
+import budgetRouter from './routes/budget-route'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use('/users', userRouter)
 app.use('/depots', depotRouter)
 app.use('/financial-movement', financialMovementRouter)
 app.use('/categories', categoryRouter)
+app.use('/budgets', budgetRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')

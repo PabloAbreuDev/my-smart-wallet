@@ -22,5 +22,11 @@ export const TYPES = {
   CreateCategoryUseCase: Symbol.for('CreateCaregoryUseCase'),
   UpdateCategoryUseCase: Symbol.for('UpdateCategoryUseCase'),
   DeleteCategoryUseCase: Symbol.for('DeleteCategoryUseCase'),
-  GetCategoriesUseCase: Symbol.for('GetCategoriesUseCase')
+  GetCategoriesUseCase: Symbol.for('GetCategoriesUseCase'),
+
+  // Budget
+  CreateBudgetUseCase: Symbol.for('CreateBudgetUseCase'),
+  UpdateBudgetUseCase: Symbol.for('UpdateBudgetUseCase'),
+  DeleteBudgetUseCase: Symbol.for('DeleteBudgetUseCase'),
+  GetBudgetsUseCase: Symbol.for('GetBudgetsUseCase')
 }

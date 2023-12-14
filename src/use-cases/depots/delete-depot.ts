@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import DepotModel from '../../models/depot'
+import Depot from '../../models/depot'
 
 export interface IDeleteDepotUseCaseRequest {
   depot_id: string
@@ -20,7 +20,7 @@ export class DeleteDepotUseCase implements IDeleteDepotUseCase {
   async execute(
     data: IDeleteDepotUseCaseRequest
   ): Promise<IDeleteDepotUseCaseResponse> {
-    const removed = !!(await DepotModel.deleteOne({
+    const removed = !!(await Depot.deleteOne({
       user_id: data.user_id,
       _id: data.depot_id
     }))

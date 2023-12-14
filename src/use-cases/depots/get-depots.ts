@@ -1,7 +1,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
 import User from '../../models/user'
-import DepotModel, { IDepot } from '../../models/depot'
+import Depot, { IDepot } from '../../models/depot'
 
 export interface IGetDepotsUseCaseRequest {
   user_id: string
@@ -26,7 +26,7 @@ export class GetDepotsUseCase implements IGetDepotsUseCase {
       throw new AppError('User not found', 400)
     }
 
-    const depots = await DepotModel.find({ user_id: data.user_id })
+    const depots = await Depot.find({ user_id: data.user_id })
 
     return { depots }
   }
