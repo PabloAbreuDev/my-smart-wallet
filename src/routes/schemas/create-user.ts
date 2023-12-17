@@ -13,7 +13,8 @@ export const createUserWithEmailRequestSchema = z.object({
       required_error: 'Email is required',
       invalid_type_error: 'Email is an string'
     })
-    .email({ message: 'Invalid email' }),
+    .email({ message: 'Invalid email' })
+    .toLowerCase(),
   password: z
     .string({
       required_error: 'Password is required',

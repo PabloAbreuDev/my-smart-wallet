@@ -1,11 +1,11 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
-import FinancialMovement from '../../models/financial-movement'
+import Transaction from '../../models/transaction'
 import User from '../../models/user'
 import { logger } from '../../utils/logger'
 import Category from '../../models/category'
 
-export interface ICreateFinancialMovementUseCaseRequest {
+export interface ICreateTransactionUseCaseRequest {
   user_id: string
   description: string
   amount: number
@@ -15,7 +15,7 @@ export interface ICreateFinancialMovementUseCaseRequest {
   categories?: string[]
 }
 
-export interface ICreateFinancialMovementUseCaseResponse {
+export interface ICreateTransactionUseCaseResponse {
   id: string
   user_id: string
   description: string
@@ -26,19 +26,17 @@ export interface ICreateFinancialMovementUseCaseResponse {
   categories?: string[]
 }
 
-export interface ICreateFinancialMovementUseCase {
+export interface ICreateTransactionUseCase {
   execute(
-    data: ICreateFinancialMovementUseCaseRequest
-  ): Promise<ICreateFinancialMovementUseCaseResponse | undefined>
+    data: ICreateTransactionUseCaseRequest
+  ): Promise<ICreateTransactionUseCaseResponse | undefined>
 }
 
 @injectable()
-export class CreateFinancialMovementUseCase
-  implements ICreateFinancialMovementUseCase
-{
+export class CreateTransactionUseCase implements ICreateTransactionUseCase {
   async execute(
-    data: ICreateFinancialMovementUseCaseRequest
-  ): Promise<ICreateFinancialMovementUseCaseResponse | undefined> {
+    data: ICreateTransactionUseCaseRequest
+  ): Promise<ICreateTransactionUseCaseResponse | undefined> {
     const userExist = await User.findById(data.user_id)
 
     if (!userExist) {
@@ -61,7 +59,7 @@ export class CreateFinancialMovementUseCase
     }
 
     try {
-      const newFinancialMovement = await FinancialMovement.create({
+      const newTransaction = await Transaction.create({
         user_id: data.user_id,
         description: data.description,
         amount: data.amount,
@@ -72,20 +70,20 @@ export class CreateFinancialMovementUseCase
       })
 
       return {
-        id: newFinancialMovement.id,
-        user_id: newFinancialMovement.user_id._id.toString(),
-        description: newFinancialMovement.description,
-        amount: newFinancialMovement.amount,
-        type: newFinancialMovement.type,
-        source: newFinancialMovement.source?._id.toString(),
-        destination: newFinancialMovement.destination?._id.toString(),
-        categories: newFinancialMovement.categories.map(item => {
+        id: newTransaction.id,
+        user_id: newTransaction.user_id._id.toString(),
+        description: newTransaction.description,
+        amount: newTransaction.amount,
+        type: newTransaction.type,
+        source: newTransaction.source?._id.toString(),
+        destination: newTransaction.destination?._id.toString(),
+        categories: newTransaction.categories.map(item => {
           return item._id.toString()
         })
       }
     } catch (err) {
       logger.error(err)
-      throw new AppError('Error doing movement', 400)
+      throw new AppError('Error doing transaction', 400)
     }
   }
 }

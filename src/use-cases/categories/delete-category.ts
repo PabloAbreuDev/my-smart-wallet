@@ -1,7 +1,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
 import Category from '../../models/category'
-import FinancialMovement from '../../models/financial-movement'
+import Transaction from '../../models/transaction'
 import User from '../../models/user'
 
 export interface IDeleteCategoryUseCaseRequest {
@@ -37,7 +37,7 @@ export class DeleteCategoryUseCase implements IDeleteCategoryUseCase {
       throw new AppError('Category not found', 400)
     }
 
-    await FinancialMovement.updateMany(
+    await Transaction.updateMany(
       { user_id: data.user_id, categories: data.category_id },
       { $pull: { categories: data.category_id } }
     )

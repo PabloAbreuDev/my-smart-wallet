@@ -2,12 +2,12 @@ import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
 import User from '../../models/user'
 
-export interface IConfirmAccountUseCase {
+export interface IConfirmUserAccountUseCase {
   execute(verifyCode: string): Promise<boolean>
 }
 
 @injectable()
-export class ConfirmAccountUseCase implements IConfirmAccountUseCase {
+export class ConfirmUserAccountUseCase implements IConfirmUserAccountUseCase {
   constructor() {}
 
   async execute(verifyCode: string): Promise<boolean> {

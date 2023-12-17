@@ -1,12 +1,12 @@
 import { Schema, Types, model } from 'mongoose'
 
-export interface IDepot {
+export interface IAccount {
   name: string
   description: string
   user_id: Types.ObjectId
 }
 
-export const depotSchema = new Schema<IDepot>(
+export const accountSchema = new Schema<IAccount>(
   {
     name: { type: String, required: true },
     description: { type: String },
@@ -15,6 +15,6 @@ export const depotSchema = new Schema<IDepot>(
   { toJSON: { virtuals: true }, timestamps: true }
 )
 
-const Depot = model<IDepot>('Depot', depotSchema)
+const Account = model<IAccount>('Account', accountSchema)
 
-export default Depot
+export default Account

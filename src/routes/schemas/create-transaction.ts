@@ -1,6 +1,6 @@
 import { Schema, ZodError, z } from 'zod'
 
-export const createFinancialMovementRequestSchema = z
+export const createTransactionRequestSchema = z
   .object({
     description: z
       .string({

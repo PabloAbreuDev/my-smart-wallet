@@ -1,6 +1,6 @@
 import { Schema, Types, model } from 'mongoose'
 
-export interface IFinancialMovement extends Document {
+export interface ITransaction extends Document {
   user_id: Types.ObjectId
   description: string
   amount: number
@@ -10,7 +10,7 @@ export interface IFinancialMovement extends Document {
   categories: Types.ObjectId[]
 }
 
-const FinancialMovementSchema = new Schema<IFinancialMovement>(
+const TransactionSchema = new Schema<ITransaction>(
   {
     user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     description: { type: String, required: true },
@@ -20,16 +20,13 @@ const FinancialMovementSchema = new Schema<IFinancialMovement>(
       enum: ['income', 'expense', 'transfer'],
       required: true
     },
-    source: { type: Schema.Types.ObjectId, ref: 'Depot', required: true },
-    destination: { type: Schema.Types.ObjectId, ref: 'Depot' },
+    source: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+    destination: { type: Schema.Types.ObjectId, ref: 'Account' },
     categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
   },
   { toJSON: { virtuals: true }, timestamps: true }
 )
 
-const FinancialMovement = model<IFinancialMovement>(
-  'FinancialMovement',
-  FinancialMovementSchema
-)
+const Transaction = model<ITransaction>('Transaction', TransactionSchema)
 
-export default FinancialMovement
+export default Transaction

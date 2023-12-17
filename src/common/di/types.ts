@@ -3,20 +3,20 @@ export const TYPES = {
   CreateUserWithEmailUseCase: Symbol.for('CreateUserWithEmailUseCase'),
   UserRepository: Symbol.for('UserRepository'),
   SendEmailUseCase: Symbol.for('SendEmailUseCase'),
-  ConfirmAccountUseCase: Symbol.for('ConfirmAccountUseCase'),
+  ConfirmUserAccountUseCase: Symbol.for('ConfirmUserAccountUseCase'),
   LoginUseCase: Symbol.for('LoginUseCase'),
 
-  // Depot
-  CreateDepotUseCase: Symbol.for('CreateDepotUseCase'),
-  UpdateDepotUseCase: Symbol.for('UpdateDepotUseCase'),
-  DeleteDepotUseCase: Symbol.for('DeleteDepotUseCase'),
-  GetDepotsUseCase: Symbol.for('GetDepotsUseCase'),
+  // Account
+  CreateAccountUseCase: Symbol.for('CreateAccountUseCase'),
+  UpdateAccountUseCase: Symbol.for('UpdateAccountUseCase'),
+  DeleteAccountUseCase: Symbol.for('DeleteAccountUseCase'),
+  GetAccountsUseCase: Symbol.for('GetAccountsUseCase'),
 
-  // Financial Movement
-  CreateFinancialMovementUseCase: Symbol.for('CreateFinancialMovementUseCase'),
-  DeleteFinancialMovementUseCase: Symbol.for('DeleteFinancialMovementUseCase'),
-  EditFinancialMovementUseCase: Symbol.for('EditFinancialMovementUseCase'),
-  GetFinancialMovementsUseCase: Symbol.for('GetFinancialMovementsUseCase'),
+  // Transaction
+  CreateTransactionUseCase: Symbol.for('CreateTransactionUseCase'),
+  DeleteTransactionUseCase: Symbol.for('DeleteTransactionUseCase'),
+  EditTransactionUseCase: Symbol.for('EditTransactionUseCase'),
+  GetTransactionsUseCase: Symbol.for('GetTransactionsUseCase'),
 
   // Category
   CreateCategoryUseCase: Symbol.for('CreateCaregoryUseCase'),

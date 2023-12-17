@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const updateDepotRequestSchema = z.object({
+export const createAccountRequestSchema = z.object({
   name: z
     .string({
       invalid_type_error: 'Name need to be an string',

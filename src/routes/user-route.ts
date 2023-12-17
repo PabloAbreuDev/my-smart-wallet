@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { UsersController } from '../controllers/users.controller'
 import {
-  confirmAccount,
+  confirmUserAccount,
   createUserWithEmail,
   loginUseCase
 } from '../common/di/composition-root'
@@ -11,7 +11,7 @@ import { createUserWithEmailRequestSchema } from './schemas/create-user'
 const userRouter = Router()
 const userController = new UsersController(
   createUserWithEmail,
-  confirmAccount,
+  confirmUserAccount,
   loginUseCase
 )
 userRouter.post(
@@ -19,7 +19,7 @@ userRouter.post(
   validateRequest(createUserWithEmailRequestSchema),
   userController.createUser
 )
-userRouter.get('/confirm/:verifycode', userController.confirmAccount)
+userRouter.get('/confirm/:verifycode', userController.confirmUserAccount)
 userRouter.post('/login', userController.login)
 
 export default userRouter

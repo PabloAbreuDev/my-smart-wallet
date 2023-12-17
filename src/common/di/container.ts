@@ -6,45 +6,45 @@ import {
   SendEmailNodemailerUseCase
 } from '../../use-cases/send-email'
 import {
-  ConfirmAccountUseCase,
-  IConfirmAccountUseCase
-} from '../../use-cases/users/confirm-account'
+  ConfirmUserAccountUseCase,
+  IConfirmUserAccountUseCase
+} from '../../use-cases/users/confirm-user-account'
 import {
-  CreateDepotUseCase,
-  ICreateDepotUseCase
-} from '../../use-cases/depots/create-depot'
+  CreateAccountUseCase,
+  ICreateAccountUseCase
+} from '../../use-cases/accounts/create-account'
 import {
   ILoginWithEmailUseCase,
   LoginWithEmailUseCase
 } from '../../use-cases/users/login-with-email'
 import {
-  IUpdateDepotUseCase,
-  UpdateDepotUseCase
-} from '../../use-cases/depots/update-depot'
+  IUpdateAccountUseCase,
+  UpdateAccountUseCase
+} from '../../use-cases/accounts/update-account'
 import {
-  DeleteDepotUseCase,
-  IDeleteDepotUseCase
-} from '../../use-cases/depots/delete-depot'
+  DeleteAccountUseCase,
+  IDeleteAccountUseCase
+} from '../../use-cases/accounts/delete-account'
 import {
-  CreateFinancialMovementUseCase,
-  ICreateFinancialMovementUseCase
-} from '../../use-cases/financial-movements/create-financial-movement'
+  CreateTransactionUseCase,
+  ICreateTransactionUseCase
+} from '../../use-cases/transactions/create-transaction'
 import {
-  DeleteFinancialMovementUseCase,
-  IDeleteFinancialMovementUseCase
-} from '../../use-cases/financial-movements/delete-financial-movement'
+  DeleteTransactionUseCase,
+  IDeleteTransactionUseCase
+} from '../../use-cases/transactions/delete-transaction'
 import {
-  EditFinancialMovementUseCase,
-  IEditFinancialMovementUseCase
-} from '../../use-cases/financial-movements/edit-financial-movement'
+  EditTransactionUseCase,
+  IEditTransactionUseCase
+} from '../../use-cases/transactions/edit-transaction'
 import {
-  GetDepotsUseCase,
-  IGetDepotsUseCase
-} from '../../use-cases/depots/get-depots'
+  GetAccountsUseCase,
+  IGetAccountsUseCase
+} from '../../use-cases/accounts/get-accounts'
 import {
-  GetFinancialMovementsUseCase,
-  IGetFinancialMovementsUseCase
-} from '../../use-cases/financial-movements/get-financial-movements'
+  GetTransactionsUseCase,
+  IGetTransactionsUseCase
+} from '../../use-cases/transactions/get-transaction'
 import {
   ICreateUserWithEmailUseCase,
   CreateUserWithEmailUseCase
@@ -90,41 +90,43 @@ myContainer
   .bind<ISendEmailUseCase>(TYPES.SendEmailUseCase)
   .to(SendEmailNodemailerUseCase)
 myContainer
-  .bind<IConfirmAccountUseCase>(TYPES.ConfirmAccountUseCase)
-  .to(ConfirmAccountUseCase)
+  .bind<IConfirmUserAccountUseCase>(TYPES.ConfirmUserAccountUseCase)
+  .to(ConfirmUserAccountUseCase)
 myContainer
-  .bind<ICreateDepotUseCase>(TYPES.CreateDepotUseCase)
-  .to(CreateDepotUseCase)
+  .bind<ICreateAccountUseCase>(TYPES.CreateAccountUseCase)
+  .to(CreateAccountUseCase)
 
 myContainer
   .bind<ILoginWithEmailUseCase>(TYPES.LoginUseCase)
   .to(LoginWithEmailUseCase)
 
 myContainer
-  .bind<IUpdateDepotUseCase>(TYPES.UpdateDepotUseCase)
-  .to(UpdateDepotUseCase)
+  .bind<IUpdateAccountUseCase>(TYPES.UpdateAccountUseCase)
+  .to(UpdateAccountUseCase)
 
 myContainer
-  .bind<IDeleteDepotUseCase>(TYPES.DeleteDepotUseCase)
-  .to(DeleteDepotUseCase)
+  .bind<IDeleteAccountUseCase>(TYPES.DeleteAccountUseCase)
+  .to(DeleteAccountUseCase)
 
 myContainer
-  .bind<ICreateFinancialMovementUseCase>(TYPES.CreateFinancialMovementUseCase)
-  .to(CreateFinancialMovementUseCase)
+  .bind<ICreateTransactionUseCase>(TYPES.CreateTransactionUseCase)
+  .to(CreateTransactionUseCase)
 
 myContainer
-  .bind<IDeleteFinancialMovementUseCase>(TYPES.DeleteFinancialMovementUseCase)
-  .to(DeleteFinancialMovementUseCase)
+  .bind<IDeleteTransactionUseCase>(TYPES.DeleteTransactionUseCase)
+  .to(DeleteTransactionUseCase)
 
 myContainer
-  .bind<IEditFinancialMovementUseCase>(TYPES.EditFinancialMovementUseCase)
-  .to(EditFinancialMovementUseCase)
-
-myContainer.bind<IGetDepotsUseCase>(TYPES.GetDepotsUseCase).to(GetDepotsUseCase)
+  .bind<IEditTransactionUseCase>(TYPES.EditTransactionUseCase)
+  .to(EditTransactionUseCase)
 
 myContainer
-  .bind<IGetFinancialMovementsUseCase>(TYPES.GetFinancialMovementsUseCase)
-  .to(GetFinancialMovementsUseCase)
+  .bind<IGetAccountsUseCase>(TYPES.GetAccountsUseCase)
+  .to(GetAccountsUseCase)
+
+myContainer
+  .bind<IGetTransactionsUseCase>(TYPES.GetTransactionsUseCase)
+  .to(GetTransactionsUseCase)
 
 myContainer
   .bind<ICreateCategoryUseCase>(TYPES.CreateCategoryUseCase)

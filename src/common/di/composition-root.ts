@@ -1,13 +1,13 @@
-import { IConfirmAccountUseCase } from '../../use-cases/users/confirm-account'
-import { ICreateDepotUseCase } from '../../use-cases/depots/create-depot'
-import { ICreateFinancialMovementUseCase } from '../../use-cases/financial-movements/create-financial-movement'
-import { IDeleteDepotUseCase } from '../../use-cases/depots/delete-depot'
-import { IDeleteFinancialMovementUseCase } from '../../use-cases/financial-movements/delete-financial-movement'
-import { IEditFinancialMovementUseCase } from '../../use-cases/financial-movements/edit-financial-movement'
-import { IGetDepotsUseCase } from '../../use-cases/depots/get-depots'
-import { IGetFinancialMovementsUseCase } from '../../use-cases/financial-movements/get-financial-movements'
+import { IConfirmUserAccountUseCase } from '../../use-cases/users/confirm-user-account'
+import { ICreateAccountUseCase } from '../../use-cases/accounts/create-account'
+import { ICreateTransactionUseCase } from '../../use-cases/transactions/create-transaction'
+import { IDeleteAccountUseCase } from '../../use-cases/accounts/delete-account'
+import { IDeleteTransactionUseCase } from '../../use-cases/transactions/delete-transaction'
+import { IEditTransactionUseCase } from '../../use-cases/transactions/edit-transaction'
+import { IGetAccountsUseCase } from '../../use-cases/accounts/get-accounts'
+import { IGetTransactionsUseCase } from '../../use-cases/transactions/get-transaction'
 import { ILoginWithEmailUseCase } from '../../use-cases/users/login-with-email'
-import { IUpdateDepotUseCase } from '../../use-cases/depots/update-depot'
+import { IUpdateAccountUseCase } from '../../use-cases/accounts/update-account'
 import myContainer from './container'
 import { TYPES } from './types'
 import { ICreateCategoryUseCase } from '../../use-cases/categories/create-category'
@@ -23,48 +23,42 @@ import { IGetBudgetsUseCase } from '../../use-cases/budgets/get-budgets'
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
 )
-export const confirmAccount = myContainer.get<IConfirmAccountUseCase>(
-  TYPES.ConfirmAccountUseCase
+export const confirmUserAccount = myContainer.get<IConfirmUserAccountUseCase>(
+  TYPES.ConfirmUserAccountUseCase
 )
-export const createDepot = myContainer.get<ICreateDepotUseCase>(
-  TYPES.CreateDepotUseCase
+export const createAccountUseCase = myContainer.get<ICreateAccountUseCase>(
+  TYPES.CreateAccountUseCase
 )
 
 export const loginUseCase = myContainer.get<ILoginWithEmailUseCase>(
   TYPES.LoginUseCase
 )
 
-export const updateDepotUseCase = myContainer.get<IUpdateDepotUseCase>(
-  TYPES.UpdateDepotUseCase
+export const updateAccountUseCase = myContainer.get<IUpdateAccountUseCase>(
+  TYPES.UpdateAccountUseCase
 )
 
-export const deleteDepotUsecase = myContainer.get<IDeleteDepotUseCase>(
-  TYPES.DeleteDepotUseCase
+export const deleteAccountUsecase = myContainer.get<IDeleteAccountUseCase>(
+  TYPES.DeleteAccountUseCase
 )
 
-export const createFinancialMovementUseCase =
-  myContainer.get<ICreateFinancialMovementUseCase>(
-    TYPES.CreateFinancialMovementUseCase
-  )
+export const createTransactionUseCase =
+  myContainer.get<ICreateTransactionUseCase>(TYPES.CreateTransactionUseCase)
 
-export const deleteFinancialMovementUseCase =
-  myContainer.get<IDeleteFinancialMovementUseCase>(
-    TYPES.DeleteFinancialMovementUseCase
-  )
+export const deleteTransactionUseCase =
+  myContainer.get<IDeleteTransactionUseCase>(TYPES.DeleteTransactionUseCase)
 
-export const editFinancialMovementUseCase =
-  myContainer.get<IEditFinancialMovementUseCase>(
-    TYPES.EditFinancialMovementUseCase
-  )
-
-export const getDepotsUseCase = myContainer.get<IGetDepotsUseCase>(
-  TYPES.GetDepotsUseCase
+export const editTransactionUseCase = myContainer.get<IEditTransactionUseCase>(
+  TYPES.EditTransactionUseCase
 )
 
-export const getFinancialMovementsUseCase =
-  myContainer.get<IGetFinancialMovementsUseCase>(
-    TYPES.GetFinancialMovementsUseCase
-  )
+export const getAccountsUseCase = myContainer.get<IGetAccountsUseCase>(
+  TYPES.GetAccountsUseCase
+)
+
+export const getTransactionsUseCase = myContainer.get<IGetTransactionsUseCase>(
+  TYPES.GetTransactionsUseCase
+)
 
 export const createCategoryUseCase = myContainer.get<ICreateCategoryUseCase>(
   TYPES.CreateCategoryUseCase

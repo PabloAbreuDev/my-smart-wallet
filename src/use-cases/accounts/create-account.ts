@@ -1,31 +1,31 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
-import Depot from '../../models/depot'
+import Account from '../../models/account'
 import User from '../../models/user'
 import { logger } from '../../utils/logger'
 
-export interface ICreateDepotUseCaseRequest {
+export interface ICreateAccountUseCaseRequest {
   name: string
   description: string
   user_id: string
 }
-export interface ICreateDepotUseCaseResponse {
+export interface ICreateAccountUseCaseResponse {
   name: string
   description: string
   user_id: string
 }
 
-export interface ICreateDepotUseCase {
+export interface ICreateAccountUseCase {
   execute(
-    data: ICreateDepotUseCaseRequest
-  ): Promise<ICreateDepotUseCaseResponse | undefined>
+    data: ICreateAccountUseCaseRequest
+  ): Promise<ICreateAccountUseCaseResponse | undefined>
 }
 
 @injectable()
-export class CreateDepotUseCase implements ICreateDepotUseCase {
+export class CreateAccountUseCase implements ICreateAccountUseCase {
   async execute(
-    data: ICreateDepotUseCaseRequest
-  ): Promise<ICreateDepotUseCaseResponse | undefined> {
+    data: ICreateAccountUseCaseRequest
+  ): Promise<ICreateAccountUseCaseResponse | undefined> {
     const userExist = await User.findById(data.user_id)
 
     if (!userExist) {
@@ -33,20 +33,20 @@ export class CreateDepotUseCase implements ICreateDepotUseCase {
     }
 
     try {
-      const newDepot = await Depot.create({
+      const newAccount = await Account.create({
         name: data.name,
         description: data.description,
         user_id: data.user_id
       })
 
       return {
-        name: newDepot.name,
-        description: newDepot.description,
-        user_id: newDepot.id
+        name: newAccount.name,
+        description: newAccount.description,
+        user_id: newAccount.id
       }
     } catch (err) {
       logger.error(err)
-      throw new AppError('Error creating depot', 400)
+      throw new AppError('Error creating account', 400)
     }
   }
 }

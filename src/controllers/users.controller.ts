@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import { IConfirmAccountUseCase } from '../use-cases/users/confirm-account'
+import { IConfirmUserAccountUseCase } from '../use-cases/users/confirm-user-account'
 import { ILoginWithEmailUseCase } from '../use-cases/users/login-with-email'
 import { ICreateUserWithEmailUseCase } from '../use-cases/users/create-user-with-email'
 
 export class UsersController {
   constructor(
     private readonly createUserUseCase: ICreateUserWithEmailUseCase,
-    private readonly confirmAccountUseCase: IConfirmAccountUseCase,
+    private readonly confirmUserAccountUseCase: IConfirmUserAccountUseCase,
     private readonly loginUseCase: ILoginWithEmailUseCase
   ) {}
 
@@ -15,8 +15,8 @@ export class UsersController {
     return response.status(201).json(result)
   }
 
-  confirmAccount = async (request: Request, response: Response) => {
-    const result = await this.confirmAccountUseCase.execute(
+  confirmUserAccount = async (request: Request, response: Response) => {
+    const result = await this.confirmUserAccountUseCase.execute(
       request.params.verifycode
     )
     return response.json({ sucess: result })

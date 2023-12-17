@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const editFinancialMovementRequestSchema = z
+export const editTransactionRequestSchema = z
   .object({
     description: z
       .string({

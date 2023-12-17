@@ -1,11 +1,11 @@
 import { injectable } from 'inversify'
 import { AppError } from '../../common/errors/application.error'
-import FinancialMovement from '../../models/financial-movement'
+import Transaction from '../../models/transaction'
 import User from '../../models/user'
 import Category from '../../models/category'
 
-export interface IEditFinancialMovementUseCaseRequest {
-  movement_id: string
+export interface IEditTransactionUseCaseRequest {
+  transaction_id: string
   user_id: string
   description: string
   amount: number
@@ -15,8 +15,8 @@ export interface IEditFinancialMovementUseCaseRequest {
   categories?: string[]
 }
 
-export interface IEditFinancialMovementUseCaseResponse {
-  movement_id: string
+export interface IEditTransactionUseCaseResponse {
+  transaction_id: string
   user_id: string
   description: string
   amount: number
@@ -26,19 +26,17 @@ export interface IEditFinancialMovementUseCaseResponse {
   categories?: string[]
 }
 
-export interface IEditFinancialMovementUseCase {
+export interface IEditTransactionUseCase {
   execute(
-    data: IEditFinancialMovementUseCaseRequest
-  ): Promise<IEditFinancialMovementUseCaseResponse | undefined>
+    data: IEditTransactionUseCaseRequest
+  ): Promise<IEditTransactionUseCaseResponse | undefined>
 }
 
 @injectable()
-export class EditFinancialMovementUseCase
-  implements IEditFinancialMovementUseCase
-{
+export class EditTransactionUseCase implements IEditTransactionUseCase {
   async execute(
-    data: IEditFinancialMovementUseCaseRequest
-  ): Promise<IEditFinancialMovementUseCaseResponse | undefined> {
+    data: IEditTransactionUseCaseRequest
+  ): Promise<IEditTransactionUseCaseResponse | undefined> {
     const userExist = await User.findById(data.user_id)
 
     if (!userExist) {
@@ -60,8 +58,8 @@ export class EditFinancialMovementUseCase
       )
     }
 
-    const editedFinancialMovement = await FinancialMovement.findOneAndUpdate(
-      { _id: data.movement_id, user_id: data.user_id },
+    const editedTransaction = await Transaction.findOneAndUpdate(
+      { _id: data.transaction_id, user_id: data.user_id },
       {
         description: data.description,
         amount: data.amount,
@@ -73,21 +71,19 @@ export class EditFinancialMovementUseCase
       { new: true }
     )
 
-    if (!editedFinancialMovement) {
-      throw new AppError('Movement not found or could not be updated', 404)
+    if (!editedTransaction) {
+      throw new AppError('Transaction not found or could not be updated', 404)
     }
 
     return {
-      movement_id: editedFinancialMovement.id,
-      user_id: editedFinancialMovement.user_id._id.toString(),
-      description: editedFinancialMovement.description,
-      amount: editedFinancialMovement.amount,
-      type: editedFinancialMovement.type,
-      source: editedFinancialMovement.source?._id.toString(),
-      destination: editedFinancialMovement.destination?._id.toString(),
-      categories: editedFinancialMovement.categories.map(item =>
-        item._id.toString()
-      )
+      transaction_id: editedTransaction.id,
+      user_id: editedTransaction.user_id._id.toString(),
+      description: editedTransaction.description,
+      amount: editedTransaction.amount,
+      type: editedTransaction.type,
+      source: editedTransaction.source?._id.toString(),
+      destination: editedTransaction.destination?._id.toString(),
+      categories: editedTransaction.categories.map(item => item._id.toString())
     }
   }
 }
