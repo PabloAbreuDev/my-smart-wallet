@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer'
-import { environmentVariables } from '../common/environment'
+import { environmentVariables } from '../../common/environment'
 import { injectable } from 'inversify'
-import { logger } from '../utils/logger'
+import { logger } from '../../utils/logger'
 
 export interface ISendEmailUseCaseRequest {
   to: string

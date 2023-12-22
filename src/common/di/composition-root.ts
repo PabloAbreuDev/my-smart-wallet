@@ -6,7 +6,6 @@ import { IDeleteTransactionUseCase } from '../../use-cases/transactions/delete-t
 import { IEditTransactionUseCase } from '../../use-cases/transactions/edit-transaction'
 import { IGetAccountsUseCase } from '../../use-cases/accounts/get-accounts'
 import { IGetTransactionsUseCase } from '../../use-cases/transactions/get-transaction'
-import { ILoginWithEmailUseCase } from '../../use-cases/users/login-with-email'
 import { IUpdateAccountUseCase } from '../../use-cases/accounts/update-account'
 import myContainer from './container'
 import { TYPES } from './types'
@@ -28,10 +27,6 @@ export const confirmUserAccount = myContainer.get<IConfirmUserAccountUseCase>(
 )
 export const createAccountUseCase = myContainer.get<ICreateAccountUseCase>(
   TYPES.CreateAccountUseCase
-)
-
-export const loginUseCase = myContainer.get<ILoginWithEmailUseCase>(
-  TYPES.LoginUseCase
 )
 
 export const updateAccountUseCase = myContainer.get<IUpdateAccountUseCase>(

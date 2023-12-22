@@ -14,7 +14,7 @@ export class BudgetsController {
 
   createBudget = async (request: Request, response: Response) => {
     const result = await this.createBudgetUseCase.execute({
-      user_id: request.user,
+      user_id: request.user.id,
       category_id: request.body.category_id,
       amount: request.body.amount,
       startDate: request.body.startDate,
@@ -25,7 +25,7 @@ export class BudgetsController {
 
   updateBudget = async (request: Request, response: Response) => {
     const result = await this.updateBudgetUseCase.execute({
-      user_id: request.user,
+      user_id: request.user.id,
       budget_id: request.params.id,
       amount: request.body.amount,
       startDate: request.body.startDate,
@@ -36,7 +36,7 @@ export class BudgetsController {
 
   deleteBudget = async (request: Request, response: Response) => {
     const result = await this.deleteBudgetUseCase.execute({
-      user_id: request.user,
+      user_id: request.user.id,
       budget_id: request.params.id
     })
     return response.json(result)
@@ -44,7 +44,7 @@ export class BudgetsController {
 
   getBudgets = async (request: Request, response: Response) => {
     const result = await this.getBudgetsUseCase.execute({
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }

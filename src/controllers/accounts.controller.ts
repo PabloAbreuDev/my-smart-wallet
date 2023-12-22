@@ -16,7 +16,7 @@ export class AccountsController {
     const result = await this.createAccountUseCase.execute({
       name: request.body.name,
       description: request.body.description,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.status(201).json(result)
   }
@@ -26,14 +26,14 @@ export class AccountsController {
       account_id: request.params.id,
       description: request.body.description,
       name: request.body.name,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }
 
   deleteAccount = async (request: Request, response: Response) => {
     const result = await this.deleteAccountUseCase.execute({
-      user_id: request.user,
+      user_id: request.user.id,
       account_id: request.params.id
     })
     return response.json(result)
@@ -41,7 +41,7 @@ export class AccountsController {
 
   getAccounts = async (request: Request, response: Response) => {
     const result = await this.getAccountsUseCase.execute({
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }

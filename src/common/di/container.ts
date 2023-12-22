@@ -4,7 +4,7 @@ import { TYPES } from './types'
 import {
   ISendEmailUseCase,
   SendEmailNodemailerUseCase
-} from '../../use-cases/send-email'
+} from '../../use-cases/system/send-email'
 import {
   ConfirmUserAccountUseCase,
   IConfirmUserAccountUseCase
@@ -13,10 +13,7 @@ import {
   CreateAccountUseCase,
   ICreateAccountUseCase
 } from '../../use-cases/accounts/create-account'
-import {
-  ILoginWithEmailUseCase,
-  LoginWithEmailUseCase
-} from '../../use-cases/users/login-with-email'
+
 import {
   IUpdateAccountUseCase,
   UpdateAccountUseCase
@@ -95,10 +92,6 @@ myContainer
 myContainer
   .bind<ICreateAccountUseCase>(TYPES.CreateAccountUseCase)
   .to(CreateAccountUseCase)
-
-myContainer
-  .bind<ILoginWithEmailUseCase>(TYPES.LoginUseCase)
-  .to(LoginWithEmailUseCase)
 
 myContainer
   .bind<IUpdateAccountUseCase>(TYPES.UpdateAccountUseCase)

@@ -1,34 +1,23 @@
 import 'reflect-metadata'
 import 'express-async-errors'
 import express, { Request, Response } from 'express'
-import { connectDatabaseLoader } from './loaders/mongodb'
-import userRouter from './routes/user-route'
-import { errorHandler } from './middleware/error-handler'
-import accountRouter from './routes/account-route'
+import { initExpress } from './loaders/express'
+import { environmentVariables } from './common/environment'
+import { initMongoDB } from './loaders/mongodb'
 import { logger } from './utils/logger'
-import transactionRouter from './routes/transaction-route'
-import categoryRouter from './routes/category-route'
-import budgetRouter from './routes/budget-route'
+import { initPassport } from './loaders/passport'
 
 const app = express()
 
-app.use(express.json())
+initExpress(app)
 
-app.use('/users', userRouter)
-app.use('/accounts', accountRouter)
-app.use('/transactions', transactionRouter)
-app.use('/categories', categoryRouter)
-app.use('/budgets', budgetRouter)
+const port = environmentVariables.api.port
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!')
+  res.send('Api is online!')
 })
 
-app.use(errorHandler)
-
-const port = 3000
-
 app.listen(port, async () => {
-  await connectDatabaseLoader()
+  await initMongoDB()
   logger.info(`App is running on port ${port}`)
 })

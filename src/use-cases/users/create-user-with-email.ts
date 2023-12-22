@@ -5,7 +5,7 @@ import User from '../../models/user'
 import { welcome } from '../../utils/emails-templates/welcome'
 import { generateUUID } from '../../utils/encrypt-decrypt'
 import { logger } from '../../utils/logger'
-import { ISendEmailUseCase } from '../send-email'
+import { ISendEmailUseCase } from '../system/send-email'
 
 export interface ICreateUserWithEmailUseCaseRequest {
   firstName: string

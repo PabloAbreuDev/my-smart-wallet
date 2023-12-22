@@ -15,7 +15,7 @@ export class CategoriesController {
   createCategory = async (request: Request, response: Response) => {
     const result = await this.createCategoryUseCase.execute({
       name: request.body.name,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.status(201).json(result)
   }
@@ -24,7 +24,7 @@ export class CategoriesController {
     const result = await this.updateCategoryUseCase.execute({
       category_id: request.params.id,
       name: request.body.name,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }
@@ -32,14 +32,14 @@ export class CategoriesController {
   deleteCategory = async (request: Request, response: Response) => {
     const result = await this.deleteCategoryUseCase.execute({
       category_id: request.params.id,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }
 
   getCategories = async (request: Request, response: Response) => {
     const result = await this.getCategoriesUseCase.execute({
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.json(result)
   }

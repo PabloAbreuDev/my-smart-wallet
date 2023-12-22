@@ -19,7 +19,7 @@ export class TransactionsController {
       amount: request.body.amount,
       type: request.body.type,
       description: request.body.description,
-      user_id: request.user,
+      user_id: request.user.id,
       categories: request.body.categories
     })
     return response.status(201).json(result)
@@ -28,7 +28,7 @@ export class TransactionsController {
   deleteTransaction = async (request: Request, response: Response) => {
     const result = await this.deleteTransactionUseCase.execute({
       transaction_id: request.params.id,
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.status(200).json(result)
   }
@@ -40,7 +40,7 @@ export class TransactionsController {
       amount: request.body.amount,
       type: request.body.type,
       description: request.body.description,
-      user_id: request.user,
+      user_id: request.user.id,
       transaction_id: request.params.id,
       categories: request.body.categories
     })
@@ -49,7 +49,7 @@ export class TransactionsController {
 
   getTransaction = async (request: Request, response: Response) => {
     const result = await this.getTransactionsUseCase.execute({
-      user_id: request.user
+      user_id: request.user.id
     })
     return response.status(200).json(result)
   }
