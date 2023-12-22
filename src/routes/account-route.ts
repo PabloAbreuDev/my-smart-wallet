@@ -6,10 +6,10 @@ import {
   getAccountsUseCase,
   updateAccountUseCase
 } from '../common/di/composition-root'
-import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createAccountRequestSchema } from './schemas/create-account'
 import { updateAccountRequestSchema } from './schemas/update-account'
+import { isAuthenticated } from '../loaders/passport'
 
 const accountRouter = Router()
 const accountController = new AccountsController(
@@ -20,16 +20,16 @@ const accountController = new AccountsController(
 )
 accountRouter.post(
   '/',
-  auth,
+  isAuthenticated,
   validateRequest(createAccountRequestSchema),
   accountController.createAccount
 )
 accountRouter.put(
   '/:id',
-  auth,
+  isAuthenticated,
   validateRequest(updateAccountRequestSchema),
   accountController.updateAccount
 )
-accountRouter.delete('/:id', auth, accountController.deleteAccount)
-accountRouter.get('/', auth, accountController.getAccounts)
+accountRouter.delete('/:id', isAuthenticated, accountController.deleteAccount)
+accountRouter.get('/', isAuthenticated, accountController.getAccounts)
 export default accountRouter

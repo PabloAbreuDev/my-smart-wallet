@@ -1,23 +1,43 @@
-import 'reflect-metadata'
-import 'express-async-errors'
-import express, { Request, Response } from 'express'
-import { initExpress } from './loaders/express'
-import { environmentVariables } from './common/environment'
-import { initMongoDB } from './loaders/mongodb'
+import { App } from './server'
 import { logger } from './utils/logger'
-import { initPassport } from './loaders/passport'
 
-const app = express()
+enum ExitStatus {
+  Failure = 1,
+  Success = 0
+}
 
-initExpress(app)
-
-const port = environmentVariables.api.port
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Api is online!')
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(
+    `App exiting due to an unhandled promise: ${promise} and reason: ${reason}`
+  )
+  // lets throw the error and let the uncaughtException handle below handle it
+  throw reason
 })
 
-app.listen(port, async () => {
-  await initMongoDB()
-  logger.info(`App is running on port ${port}`)
+process.on('uncaughtException', error => {
+  logger.error(`App exiting due to an uncaught exception: ${error}`)
+  process.exit(ExitStatus.Failure)
 })
+;(async (): Promise<void> => {
+  try {
+    const myApp = new App()
+    myApp.startServer()
+
+    const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT']
+    for (const exitSignal of exitSignals) {
+      process.on(exitSignal, async () => {
+        try {
+          await myApp.quit()
+          logger.info(`App exited with success`)
+          process.exit(ExitStatus.Success)
+        } catch (error) {
+          logger.error(`App exited with error: ${error}`)
+          process.exit(ExitStatus.Failure)
+        }
+      })
+    }
+  } catch (error) {
+    logger.error(`App exited with error: ${error}`)
+    process.exit(ExitStatus.Failure)
+  }
+})()

@@ -26,5 +26,9 @@ export const environmentVariables = {
   google: {
     clienteID: String(config.get('google.clienteID')),
     clienteSecret: String(config.get('google.clienteSecret'))
+  },
+
+  session: {
+    secret: String(config.get('session.secret'))
   }
 }

@@ -5,7 +5,6 @@ import User from '../../models/user'
 import { logger } from '../../utils/logger'
 import { ISendEmailUseCase } from '../system/send-email'
 import { onboardingGoogle } from '../../utils/emails-templates/onboarding-google'
-import { string } from 'zod'
 
 export interface ICreateUserWithGoogleUseCaseRequest {
   firstName: string

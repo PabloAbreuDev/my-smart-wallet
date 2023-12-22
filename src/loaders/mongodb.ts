@@ -12,3 +12,14 @@ export async function initMongoDB() {
     throw error
   }
 }
+
+export async function closeMongoDB() {
+  try {
+    await mongoose.connection.close()
+    logger.info('Database connection closed!')
+    return true
+  } catch (error) {
+    logger.error('Error closing database connection:', error)
+    throw error
+  }
+}

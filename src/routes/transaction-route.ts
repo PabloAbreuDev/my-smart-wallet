@@ -10,6 +10,7 @@ import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createTransactionRequestSchema } from './schemas/create-transaction'
 import { editTransactionRequestSchema } from './schemas/edit-transaction'
+import { isAuthenticated } from '../loaders/passport'
 
 const transactionRouter = Router()
 
@@ -22,20 +23,28 @@ const transactionController = new TransactionsController(
 
 transactionRouter.post(
   '/',
-  auth,
+  isAuthenticated,
   validateRequest(createTransactionRequestSchema),
   transactionController.createTransaction
 )
 
-transactionRouter.delete('/:id', auth, transactionController.deleteTransaction)
+transactionRouter.delete(
+  '/:id',
+  isAuthenticated,
+  transactionController.deleteTransaction
+)
 
 transactionRouter.put(
   '/:id',
-  auth,
+  isAuthenticated,
   validateRequest(editTransactionRequestSchema),
   transactionController.editTransaction
 )
 
-transactionRouter.get('/', auth, transactionController.getTransaction)
+transactionRouter.get(
+  '/',
+  isAuthenticated,
+  transactionController.getTransaction
+)
 
 export default transactionRouter

@@ -10,6 +10,7 @@ import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createCategoryRequestSchema } from './schemas/create-category'
 import { updateCategoryRequestSchema } from './schemas/update-category'
+import { isAuthenticated } from '../loaders/passport'
 
 const categoryRouter = Router()
 
@@ -22,20 +23,24 @@ const categoryController = new CategoriesController(
 
 categoryRouter.post(
   '/',
-  auth,
+  isAuthenticated,
   validateRequest(createCategoryRequestSchema),
   categoryController.createCategory
 )
 
 categoryRouter.put(
   '/:id',
-  auth,
+  isAuthenticated,
   validateRequest(updateCategoryRequestSchema),
   categoryController.updateCategory
 )
 
-categoryRouter.delete('/:id', auth, categoryController.deleteCategory)
+categoryRouter.delete(
+  '/:id',
+  isAuthenticated,
+  categoryController.deleteCategory
+)
 
-categoryRouter.get('/', auth, categoryController.getCategories)
+categoryRouter.get('/', isAuthenticated, categoryController.getCategories)
 
 export default categoryRouter
