@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify'
 import { TYPES } from '../../common/di/types'
 import { AppError } from '../../common/errors/application.error'
 import User from '../../models/user'
-import { welcome } from '../../utils/emails-templates/welcome'
+import { onboardingEmailPassword } from '../../utils/emails-templates/onboarding-email-password'
 import { generateUUID } from '../../utils/encrypt-decrypt'
 import { logger } from '../../utils/logger'
 import { ISendEmailUseCase } from '../system/send-email'
@@ -54,11 +54,19 @@ export class CreateUserWithEmailUseCase implements ICreateUserWithEmailUseCase {
       verifyCode: verifyCode
     })
 
+    await User.findByIdAndUpdate(newUser._id, {
+      currentProvider: 'LOCAL',
+      localProvider: {
+        email: data.email,
+        id: newUser._id
+      }
+    })
+
     try {
       await this.sendEmailUseCase.execute({
         to: data.email,
         subject: 'Welcome to smart waller',
-        template: welcome(data.firstName, verifyCode)
+        template: onboardingEmailPassword(data.firstName, verifyCode)
       })
     } catch (err) {
       logger.error(err)

@@ -18,5 +18,9 @@
     "jwt": {
         "secret": "",
         "expiresIn": ""
+    },
+    "google":{
+        "clienteID": "",
+        "clienteSecret": ""
     }
 }

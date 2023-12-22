@@ -7,6 +7,7 @@ export const TYPES = {
 
   // Account
   CreateAccountUseCase: Symbol.for('CreateAccountUseCase'),
+  CreateUserWithGoogleUseCase: Symbol.for('CreateUserWithGoogle'),
   UpdateAccountUseCase: Symbol.for('UpdateAccountUseCase'),
   DeleteAccountUseCase: Symbol.for('DeleteAccountUseCase'),
   GetAccountsUseCase: Symbol.for('GetAccountsUseCase'),

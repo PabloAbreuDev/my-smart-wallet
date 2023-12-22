@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Request, Router, Response } from 'express'
 import { UsersController } from '../controllers/users.controller'
 import {
   confirmUserAccount,
@@ -24,6 +24,29 @@ userRouter.get(
   isAuthenticated,
   userController.confirmUserAccount
 )
-userRouter.post('/login', passport.authenticate('local'))
+
+userRouter.get(
+  '/login/google/callback',
+  passport.authenticate('google'),
+  (req: Request, res: Response) => {
+    res.send('Logged in Succefully')
+  }
+)
+
+userRouter.get(
+  '/login/google',
+  passport.authenticate('google', { scope: ['email', 'profile'] }),
+  (req: Request, res: Response) => {
+    res.send('Logged in Succefully')
+  }
+)
+
+userRouter.post(
+  '/login/local',
+  passport.authenticate('local'),
+  (req: Request, res: Response) => {
+    res.send('Logged in Succefully')
+  }
+)
 
 export default userRouter

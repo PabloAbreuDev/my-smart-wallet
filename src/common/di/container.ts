@@ -78,6 +78,10 @@ import {
   GetBudgetsUseCase,
   IGetBudgetsUseCase
 } from '../../use-cases/budgets/get-budgets'
+import {
+  CreateUserWithGoogleUseCase,
+  ICreateUserWithGoogleUseCase
+} from '../../use-cases/users/create-user-with-google'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -92,6 +96,10 @@ myContainer
 myContainer
   .bind<ICreateAccountUseCase>(TYPES.CreateAccountUseCase)
   .to(CreateAccountUseCase)
+
+myContainer
+  .bind<ICreateUserWithGoogleUseCase>(TYPES.CreateUserWithGoogleUseCase)
+  .to(CreateUserWithGoogleUseCase)
 
 myContainer
   .bind<IUpdateAccountUseCase>(TYPES.UpdateAccountUseCase)

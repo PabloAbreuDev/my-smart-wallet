@@ -8,6 +8,15 @@ export interface IUser extends Document {
   password: string
   verifyCode: string
   verified: boolean
+  currentProvider: 'GOOGLE' | 'LOCAL'
+  googleProvider: {
+    id: string
+    email: string
+  }
+  localProvider: {
+    id: string
+    email: string
+  }
 }
 
 export const userSchema = new Schema<IUser>(
@@ -15,9 +24,22 @@ export const userSchema = new Schema<IUser>(
     firstName: { type: String, required: true, minlength: 3 },
     lastName: { type: String, required: true, minlength: 3 },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, select: false },
-    verifyCode: { type: String, required: true },
-    verified: { type: Boolean, default: false }
+    password: { type: String, select: false },
+    verifyCode: { type: String },
+    verified: { type: Boolean, default: false },
+    currentProvider: {
+      type: String,
+      enum: ['GOOGLE', 'LOCAL'],
+      required: true
+    },
+    googleProvider: {
+      id: { type: String },
+      email: { type: String }
+    },
+    localProvider: {
+      id: { type: String },
+      email: { type: String }
+    }
   },
   { toJSON: { virtuals: true }, timestamps: true }
 )

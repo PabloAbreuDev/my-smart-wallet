@@ -21,5 +21,10 @@ export const environmentVariables = {
   jwt: {
     secret: String(config.get('jwt.secret')),
     expiresIn: String(config.get('jwt.expiresIn'))
+  },
+
+  google: {
+    clienteID: String(config.get('google.clienteID')),
+    clienteSecret: String(config.get('google.clienteSecret'))
   }
 }
