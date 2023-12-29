@@ -94,7 +94,6 @@ export async function initPassport(app: Express) {
     done(null, { id: user?._id.toString() })
   })
 }
-
 export function isAuthenticated(
   req: Request,
   res: Response,

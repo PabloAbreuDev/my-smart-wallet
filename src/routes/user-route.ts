@@ -7,6 +7,7 @@ import {
 import { validateRequest } from '../middleware/zod-validator'
 import { createUserWithEmailRequestSchema } from './schemas/create-user'
 import passport from 'passport'
+import { isAuthenticated } from '../loaders/passport'
 
 const userRouter = Router()
 const userController = new UsersController(
@@ -24,16 +25,13 @@ userRouter.get(
   '/login/google/callback',
   passport.authenticate('google'),
   (req: Request, res: Response) => {
-    res.send('Logged in Succefully')
+    res.redirect('http://localhost:3001/login-success')
   }
 )
 
 userRouter.get(
   '/login/google',
-  passport.authenticate('google', { scope: ['email', 'profile'] }),
-  (req: Request, res: Response) => {
-    res.send('Logged in Succefully')
-  }
+  passport.authenticate('google', { scope: ['email', 'profile'] })
 )
 
 userRouter.post(

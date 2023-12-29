@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import 'express-async-errors'
+import cors from 'cors'
 import express, { Express, Request, Response } from 'express'
 import session from 'express-session'
 import { environmentVariables } from './common/environment'
@@ -13,6 +14,7 @@ import transactionRouter from './routes/transaction-route'
 import userRouter from './routes/user-route'
 import { logger } from './utils/logger'
 import { Server, createServer } from 'http'
+import cookieParser from 'cookie-parser'
 
 export class App {
   private app: Express
@@ -22,11 +24,16 @@ export class App {
     this.app = express()
     this.server = createServer(this.app)
     this.initializeMiddlewares()
+    this.initializeLoaders()
     this.initializeRoutes()
   }
 
   private async initializeMiddlewares() {
     this.app.use(express.json())
+    this.app.use(express.urlencoded())
+
+    this.app.use(cors({ origin: 'http://localhost:3001', credentials: true }))
+
     this.app.use(
       session({
         secret: environmentVariables.session.secret,
@@ -34,6 +41,11 @@ export class App {
         saveUninitialized: true
       })
     )
+
+    this.app.use(cookieParser())
+  }
+
+  private async initializeLoaders() {
     initPassport(this.app)
     await initMongoDB()
   }
