@@ -42,4 +42,15 @@ userRouter.post(
   }
 )
 
+userRouter.get('/me', isAuthenticated, userController.me)
+
+userRouter.get('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err)
+    }
+    res.redirect('/')
+  })
+})
+
 export default userRouter

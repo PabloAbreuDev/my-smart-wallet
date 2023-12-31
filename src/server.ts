@@ -31,9 +31,7 @@ export class App {
   private async initializeMiddlewares() {
     this.app.use(express.json())
     this.app.use(express.urlencoded())
-
     this.app.use(cors({ origin: 'http://localhost:3001', credentials: true }))
-
     this.app.use(
       session({
         secret: environmentVariables.session.secret,
@@ -41,7 +39,6 @@ export class App {
         saveUninitialized: true
       })
     )
-
     this.app.use(cookieParser())
   }
 
