@@ -5,7 +5,6 @@ import {
   deleteBudgetUseCase,
   getBudgetsUseCase
 } from '../common/di/composition-root'
-import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createBudgetRequestSchema } from './schemas/create-budget'
 import { updateBudgetRequestSchema } from './schemas/update-budget'

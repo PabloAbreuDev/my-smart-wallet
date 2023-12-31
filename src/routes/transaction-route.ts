@@ -6,7 +6,6 @@ import {
   getTransactionsUseCase
 } from '../common/di/composition-root'
 import { TransactionsController } from '../controllers/transactions.controller'
-import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createTransactionRequestSchema } from './schemas/create-transaction'
 import { editTransactionRequestSchema } from './schemas/edit-transaction'

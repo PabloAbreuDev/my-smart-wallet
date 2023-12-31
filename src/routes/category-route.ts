@@ -6,7 +6,6 @@ import {
   getCategoriesUseCase,
   updateCategoryUseCase
 } from '../common/di/composition-root'
-import { auth } from '../middleware/auth'
 import { validateRequest } from '../middleware/zod-validator'
 import { createCategoryRequestSchema } from './schemas/create-category'
 import { updateCategoryRequestSchema } from './schemas/update-category'
