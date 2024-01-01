@@ -19,6 +19,8 @@ import { IUpdateBudgetUseCase } from '../../use-cases/budgets/update-budget'
 import { IDeleteBudgetUseCase } from '../../use-cases/budgets/delete-budget'
 import { IGetBudgetsUseCase } from '../../use-cases/budgets/get-budgets'
 import { ICreateUserWithGoogleUseCase } from '../../use-cases/users/create-user-with-google'
+import { IForgotPasswordUseCase } from '../../use-cases/users/forgot-password'
+import { IChangePasswordUseCase } from '../../use-cases/users/change-password'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -91,4 +93,12 @@ export const deleteBudgetUseCase = myContainer.get<IDeleteBudgetUseCase>(
 
 export const getBudgetsUseCase = myContainer.get<IGetBudgetsUseCase>(
   TYPES.GetBudgetsUseCase
+)
+
+export const forgotPasswordUseCase = myContainer.get<IForgotPasswordUseCase>(
+  TYPES.ForgotPasswordUseCase
+)
+
+export const changePasswordUseCase = myContainer.get<IChangePasswordUseCase>(
+  TYPES.ChangePasswordUseCase
 )

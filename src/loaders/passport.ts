@@ -1,5 +1,5 @@
-import * as localStrategy from 'passport-local'
-import * as googleStrategy from 'passport-google-oauth2'
+import * as local from 'passport-local'
+import * as google from 'passport-google-oauth2'
 import { Express, NextFunction, Request, Response } from 'express'
 import passport, { Profile } from 'passport'
 import User, { IUser } from '../models/user'
@@ -12,7 +12,7 @@ export async function initPassport(app: Express) {
   app.use(passport.authenticate('session'))
 
   passport.use(
-    new localStrategy.Strategy(
+    new local.Strategy(
       { usernameField: 'email', passwordField: 'password' },
       async (email, password, done) => {
         try {
@@ -41,7 +41,7 @@ export async function initPassport(app: Express) {
   )
 
   passport.use(
-    new googleStrategy.Strategy(
+    new google.Strategy(
       {
         clientID: environmentVariables.google.clienteID,
         clientSecret: environmentVariables.google.clienteSecret,

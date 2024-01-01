@@ -4,6 +4,8 @@ export const TYPES = {
   UserRepository: Symbol.for('UserRepository'),
   SendEmailUseCase: Symbol.for('SendEmailUseCase'),
   ConfirmUserAccountUseCase: Symbol.for('ConfirmUserAccountUseCase'),
+  ForgotPasswordUseCase: Symbol.for('ForgotPasswordUseCase'),
+  ChangePasswordUseCase: Symbol.for('ChangePasswordUseCase'),
 
   // Account
   CreateAccountUseCase: Symbol.for('CreateAccountUseCase'),

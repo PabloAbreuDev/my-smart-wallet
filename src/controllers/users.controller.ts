@@ -3,11 +3,15 @@ import { IConfirmUserAccountUseCase } from '../use-cases/users/confirm-user-acco
 import { ICreateUserWithEmailUseCase } from '../use-cases/users/create-user-with-email'
 import User from '../models/user'
 import { AppError } from '../common/errors/application.error'
+import { IForgotPasswordUseCase } from '../use-cases/users/forgot-password'
+import { IChangePasswordUseCase } from '../use-cases/users/change-password'
 
 export class UsersController {
   constructor(
     private readonly createUserUseCase: ICreateUserWithEmailUseCase,
-    private readonly confirmUserAccountUseCase: IConfirmUserAccountUseCase
+    private readonly confirmUserAccountUseCase: IConfirmUserAccountUseCase,
+    private readonly forgotPasswordUseCase: IForgotPasswordUseCase,
+    private readonly changePasswordUseCase: IChangePasswordUseCase
   ) {}
 
   createUser = async (request: Request, response: Response) => {
@@ -27,12 +31,26 @@ export class UsersController {
     if (!user) {
       throw new AppError('User not found', 400)
     }
-
     return response.json({
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email
     })
+  }
+
+  forgot = async (request: Request, response: Response) => {
+    await this.forgotPasswordUseCase.execute({
+      email: request.body.email
+    })
+    return response.json({ message: 'Email sended' })
+  }
+
+  changePassword = async (request: Request, response: Response) => {
+    const result = await this.changePasswordUseCase.execute({
+      code: request.body.code,
+      newPassword: request.body.newPassword
+    })
+    return response.json(result)
   }
 }

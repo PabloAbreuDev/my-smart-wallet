@@ -16,6 +16,7 @@ export interface ISendEmailUseCase {
 @injectable()
 export class SendEmailNodemailerUseCase implements ISendEmailUseCase {
   async execute(data: ISendEmailUseCaseRequest): Promise<void> {
+    console.log(data)
     const transporter = nodemailer.createTransport({
       host: environmentVariables.smtp.host,
       port: environmentVariables.smtp.port,

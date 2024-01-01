@@ -5,6 +5,9 @@ export const environmentVariables = {
     baseUrl: config.get('api.baseUrl'),
     port: config.get('api.port')
   },
+  frontend: {
+    baseUrl: config.get('frontend.baseUrl')
+  },
   database: {
     urlConnection: String(config.get('database.urlConnection'))
   },

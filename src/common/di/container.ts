@@ -82,6 +82,14 @@ import {
   CreateUserWithGoogleUseCase,
   ICreateUserWithGoogleUseCase
 } from '../../use-cases/users/create-user-with-google'
+import {
+  ForgotPasswordUseCase,
+  IForgotPasswordUseCase
+} from '../../use-cases/users/forgot-password'
+import {
+  ChangePasswordUseCase,
+  IChangePasswordUseCase
+} from '../../use-cases/users/change-password'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -160,5 +168,13 @@ myContainer
 myContainer
   .bind<IGetBudgetsUseCase>(TYPES.GetBudgetsUseCase)
   .to(GetBudgetsUseCase)
+
+myContainer
+  .bind<IForgotPasswordUseCase>(TYPES.ForgotPasswordUseCase)
+  .to(ForgotPasswordUseCase)
+
+myContainer
+  .bind<IChangePasswordUseCase>(TYPES.ChangePasswordUseCase)
+  .to(ChangePasswordUseCase)
 
 export default myContainer

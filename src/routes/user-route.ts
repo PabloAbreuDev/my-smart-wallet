@@ -1,18 +1,24 @@
 import { Request, Router, Response } from 'express'
 import { UsersController } from '../controllers/users.controller'
 import {
+  changePasswordUseCase,
   confirmUserAccount,
-  createUserWithEmail
+  createUserWithEmail,
+  forgotPasswordUseCase
 } from '../common/di/composition-root'
 import { validateRequest } from '../middleware/zod-validator'
 import { createUserWithEmailRequestSchema } from './schemas/create-user'
 import passport from 'passport'
 import { isAuthenticated } from '../loaders/passport'
+import { forgotPasswordRequestSchema } from './schemas/forgot-password'
+import { changePasswordRequestSchema } from './schemas/change-password'
 
 const userRouter = Router()
 const userController = new UsersController(
   createUserWithEmail,
-  confirmUserAccount
+  confirmUserAccount,
+  forgotPasswordUseCase,
+  changePasswordUseCase
 )
 userRouter.post(
   '/',
@@ -52,5 +58,17 @@ userRouter.get('/logout', function (req, res, next) {
     res.redirect('/')
   })
 })
+
+userRouter.post(
+  '/forgot-password',
+  validateRequest(forgotPasswordRequestSchema),
+  userController.forgot
+)
+
+userRouter.patch(
+  '/change-password',
+  validateRequest(changePasswordRequestSchema),
+  userController.changePassword
+)
 
 export default userRouter
