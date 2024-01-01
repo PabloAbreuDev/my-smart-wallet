@@ -24,10 +24,16 @@ export class ChangePasswordUseCase implements IChangePasswordUseCase {
   async execute(
     data: IChangePasswordlUseCaseRequest
   ): Promise<IChangePasswordlUseCaseResponse> {
-    const changePassword = await ChangePassword.findOne({ code: data.code })
+    const changePassword = await ChangePassword.findOne({
+      code: data.code,
+      active: true
+    })
 
     if (!changePassword) {
-      throw new AppError('Invalid code', 400)
+      throw new AppError(
+        'Invalid or expired password reset code. Please request a new one.',
+        400
+      )
     }
 
     const salt = await bcrypt.genSalt(10)
