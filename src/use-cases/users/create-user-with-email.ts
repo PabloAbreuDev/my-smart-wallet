@@ -51,11 +51,11 @@ export class CreateUserWithEmailUseCase implements ICreateUserWithEmailUseCase {
       lastName: data.lastName,
       email: data.email,
       password: data.password,
-      verifyCode: verifyCode
+      verifyCode: verifyCode,
+      currentProvider: 'LOCAL'
     })
 
     await User.findByIdAndUpdate(newUser._id, {
-      currentProvider: 'LOCAL',
       localProvider: {
         email: data.email,
         id: newUser._id

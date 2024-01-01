@@ -65,7 +65,7 @@ export const forgotPassword = (name: string, code: string) => {
         <p>
           To reset your password, click the button below:
         </p>
-        <a href="" class="cta-button">Reset Password</a>
+        <a href="${link}" class="cta-button">Reset Password</a>
         <p>
           If the button above does not work, you can also copy and paste the following link into your browser's address
           bar:
