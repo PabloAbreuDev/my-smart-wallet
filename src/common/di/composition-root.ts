@@ -21,6 +21,11 @@ import { IGetBudgetsUseCase } from '../../use-cases/budgets/get-budgets'
 import { ICreateUserWithGoogleUseCase } from '../../use-cases/users/create-user-with-google'
 import { IForgotPasswordUseCase } from '../../use-cases/users/forgot-password'
 import { IChangePasswordUseCase } from '../../use-cases/users/change-password'
+import { IAccountController } from '../../controllers/accounts.controller'
+import { IBudgetController } from '../../controllers/budgets.controller'
+import { ICategoriesController } from '../../controllers/categories.controller'
+import { ITransactionsController } from '../../controllers/transactions.controller'
+import { IUsersController } from '../../controllers/users.controller'
 
 export const createUserWithEmail = myContainer.get<ICreateUserWithEmailUseCase>(
   TYPES.CreateUserWithEmailUseCase
@@ -101,4 +106,24 @@ export const forgotPasswordUseCase = myContainer.get<IForgotPasswordUseCase>(
 
 export const changePasswordUseCase = myContainer.get<IChangePasswordUseCase>(
   TYPES.ChangePasswordUseCase
+)
+
+export const accountController = myContainer.get<IAccountController>(
+  TYPES.AccountController
+)
+
+export const budgetsController = myContainer.get<IBudgetController>(
+  TYPES.BudgetController
+)
+
+export const categoriesController = myContainer.get<ICategoriesController>(
+  TYPES.CategoriesController
+)
+
+export const transactionsController = myContainer.get<ITransactionsController>(
+  TYPES.TransactionsController
+)
+
+export const usersController = myContainer.get<IUsersController>(
+  TYPES.UsersController
 )

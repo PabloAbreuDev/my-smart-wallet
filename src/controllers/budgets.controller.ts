@@ -3,12 +3,26 @@ import { ICreateBudgetUseCase } from '../use-cases/budgets/create-budget'
 import { IDeleteBudgetUseCase } from '../use-cases/budgets/delete-budget'
 import { IUpdateBudgetUseCase } from '../use-cases/budgets/update-budget'
 import { IGetBudgetsUseCase } from '../use-cases/budgets/get-budgets'
+import { ControllerInterface } from '.'
+import { inject, injectable } from 'inversify'
+import { TYPES } from '../common/di/types'
 
-export class BudgetsController {
+export interface IBudgetController {
+  createBudget: ControllerInterface
+  updateBudget: ControllerInterface
+  deleteBudget: ControllerInterface
+  getBudgets: ControllerInterface
+}
+@injectable()
+export class BudgetsController implements IBudgetController {
   constructor(
+    @inject(TYPES.CreateBudgetUseCase)
     private readonly createBudgetUseCase: ICreateBudgetUseCase,
+    @inject(TYPES.UpdateBudgetUseCase)
     private readonly updateBudgetUseCase: IUpdateBudgetUseCase,
+    @inject(TYPES.DeleteBudgetUseCase)
     private readonly deleteBudgetUseCase: IDeleteBudgetUseCase,
+    @inject(TYPES.GetBudgetsUseCase)
     private readonly getBudgetsUseCase: IGetBudgetsUseCase
   ) {}
 

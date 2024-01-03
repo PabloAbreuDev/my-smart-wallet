@@ -90,6 +90,26 @@ import {
   ChangePasswordUseCase,
   IChangePasswordUseCase
 } from '../../use-cases/users/change-password'
+import {
+  AccountsController,
+  IAccountController
+} from '../../controllers/accounts.controller'
+import {
+  BudgetsController,
+  IBudgetController
+} from '../../controllers/budgets.controller'
+import {
+  CategoriesController,
+  ICategoriesController
+} from '../../controllers/categories.controller'
+import {
+  ITransactionsController,
+  TransactionsController
+} from '../../controllers/transactions.controller'
+import {
+  IUsersController,
+  UsersController
+} from '../../controllers/users.controller'
 
 const myContainer = new Container({ skipBaseClassChecks: true })
 myContainer
@@ -176,5 +196,23 @@ myContainer
 myContainer
   .bind<IChangePasswordUseCase>(TYPES.ChangePasswordUseCase)
   .to(ChangePasswordUseCase)
+
+myContainer
+  .bind<IAccountController>(TYPES.AccountController)
+  .to(AccountsController)
+
+myContainer
+  .bind<IBudgetController>(TYPES.BudgetController)
+  .to(BudgetsController)
+
+myContainer
+  .bind<ICategoriesController>(TYPES.CategoriesController)
+  .to(CategoriesController)
+
+myContainer
+  .bind<ITransactionsController>(TYPES.TransactionsController)
+  .to(TransactionsController)
+
+myContainer.bind<IUsersController>(TYPES.UsersController).to(UsersController)
 
 export default myContainer

@@ -4,7 +4,8 @@ import {
   changePasswordUseCase,
   confirmUserAccount,
   createUserWithEmail,
-  forgotPasswordUseCase
+  forgotPasswordUseCase,
+  usersController
 } from '../common/di/composition-root'
 import { validateRequest } from '../middleware/zod-validator'
 import { createUserWithEmailRequestSchema } from './schemas/create-user'
@@ -14,18 +15,13 @@ import { forgotPasswordRequestSchema } from './schemas/forgot-password'
 import { changePasswordRequestSchema } from './schemas/change-password'
 
 const userRouter = Router()
-const userController = new UsersController(
-  createUserWithEmail,
-  confirmUserAccount,
-  forgotPasswordUseCase,
-  changePasswordUseCase
-)
+
 userRouter.post(
   '/',
   validateRequest(createUserWithEmailRequestSchema),
-  userController.createUser
+  usersController.createUser
 )
-userRouter.get('/confirm/:verifycode', userController.confirmUserAccount)
+userRouter.get('/confirm/:verifycode', usersController.confirmUserAccount)
 
 userRouter.get(
   '/login/google/callback',
@@ -48,7 +44,7 @@ userRouter.post(
   }
 )
 
-userRouter.get('/me', isAuthenticated, userController.me)
+userRouter.get('/me', isAuthenticated, usersController.me)
 
 userRouter.get('/logout', function (req, res, next) {
   req.logout(function (err) {
@@ -62,13 +58,13 @@ userRouter.get('/logout', function (req, res, next) {
 userRouter.post(
   '/forgot-password',
   validateRequest(forgotPasswordRequestSchema),
-  userController.forgot
+  usersController.forgot
 )
 
 userRouter.patch(
   '/change-password',
   validateRequest(changePasswordRequestSchema),
-  userController.changePassword
+  usersController.changePassword
 )
 
 export default userRouter

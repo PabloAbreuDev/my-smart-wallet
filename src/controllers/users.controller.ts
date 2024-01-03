@@ -5,12 +5,28 @@ import User from '../models/user'
 import { AppError } from '../common/errors/application.error'
 import { IForgotPasswordUseCase } from '../use-cases/users/forgot-password'
 import { IChangePasswordUseCase } from '../use-cases/users/change-password'
+import { inject, injectable } from 'inversify'
+import { ControllerInterface } from '.'
+import { TYPES } from '../common/di/types'
 
-export class UsersController {
+export interface IUsersController {
+  createUser: ControllerInterface
+  confirmUserAccount: ControllerInterface
+  me: ControllerInterface
+  forgot: ControllerInterface
+  changePassword: ControllerInterface
+}
+
+@injectable()
+export class UsersController implements IUsersController {
   constructor(
+    @inject(TYPES.CreateUserWithEmailUseCase)
     private readonly createUserUseCase: ICreateUserWithEmailUseCase,
+    @inject(TYPES.ConfirmUserAccountUseCase)
     private readonly confirmUserAccountUseCase: IConfirmUserAccountUseCase,
+    @inject(TYPES.ForgotPasswordUseCase)
     private readonly forgotPasswordUseCase: IForgotPasswordUseCase,
+    @inject(TYPES.ChangePasswordUseCase)
     private readonly changePasswordUseCase: IChangePasswordUseCase
   ) {}
 

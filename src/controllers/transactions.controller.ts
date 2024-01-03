@@ -3,12 +3,27 @@ import { ICreateTransactionUseCase } from '../use-cases/transactions/create-tran
 import { IDeleteTransactionUseCase } from '../use-cases/transactions/delete-transaction'
 import { IEditTransactionUseCase } from '../use-cases/transactions/edit-transaction'
 import { IGetTransactionsUseCase } from '../use-cases/transactions/get-transaction'
+import { inject, injectable } from 'inversify'
+import { ControllerInterface } from '.'
+import { TYPES } from '../common/di/types'
 
-export class TransactionsController {
+export interface ITransactionsController {
+  createTransaction: ControllerInterface
+  deleteTransaction: ControllerInterface
+  editTransaction: ControllerInterface
+  getTransaction: ControllerInterface
+}
+
+@injectable()
+export class TransactionsController implements ITransactionsController {
   constructor(
+    @inject(TYPES.CreateTransactionUseCase)
     private readonly createTransactionUseCase: ICreateTransactionUseCase,
+    @inject(TYPES.DeleteTransactionUseCase)
     private readonly deleteTransactionUseCase: IDeleteTransactionUseCase,
+    @inject(TYPES.EditTransactionUseCase)
     private readonly editTransactionUseCase: IEditTransactionUseCase,
+    @inject(TYPES.GetTransactionsUseCase)
     private readonly getTransactionsUseCase: IGetTransactionsUseCase
   ) {}
 

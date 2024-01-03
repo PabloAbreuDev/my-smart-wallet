@@ -1,24 +1,11 @@
 import { Router } from 'express'
-import {
-  createBudgetUseCase,
-  updateBudgetUseCase,
-  deleteBudgetUseCase,
-  getBudgetsUseCase
-} from '../common/di/composition-root'
+import { budgetsController } from '../common/di/composition-root'
 import { validateRequest } from '../middleware/zod-validator'
 import { createBudgetRequestSchema } from './schemas/create-budget'
 import { updateBudgetRequestSchema } from './schemas/update-budget'
-import { BudgetsController } from '../controllers/budgets.controller'
 import { isAuthenticated } from '../loaders/passport'
 
 const budgetRouter = Router()
-
-const budgetsController = new BudgetsController(
-  createBudgetUseCase,
-  updateBudgetUseCase,
-  deleteBudgetUseCase,
-  getBudgetsUseCase
-)
 
 budgetRouter.post(
   '/',

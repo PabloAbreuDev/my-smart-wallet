@@ -1,23 +1,12 @@
 import { Router } from 'express'
-import { AccountsController } from '../controllers/accounts.controller'
-import {
-  createAccountUseCase,
-  deleteAccountUsecase,
-  getAccountsUseCase,
-  updateAccountUseCase
-} from '../common/di/composition-root'
+import { accountController } from '../common/di/composition-root'
 import { validateRequest } from '../middleware/zod-validator'
 import { createAccountRequestSchema } from './schemas/create-account'
 import { updateAccountRequestSchema } from './schemas/update-account'
 import { isAuthenticated } from '../loaders/passport'
 
 const accountRouter = Router()
-const accountController = new AccountsController(
-  createAccountUseCase,
-  updateAccountUseCase,
-  deleteAccountUsecase,
-  getAccountsUseCase
-)
+
 accountRouter.post(
   '/',
   isAuthenticated,

@@ -3,7 +3,8 @@ import {
   createTransactionUseCase,
   deleteTransactionUseCase,
   editTransactionUseCase,
-  getTransactionsUseCase
+  getTransactionsUseCase,
+  transactionsController
 } from '../common/di/composition-root'
 import { TransactionsController } from '../controllers/transactions.controller'
 import { validateRequest } from '../middleware/zod-validator'
@@ -13,37 +14,30 @@ import { isAuthenticated } from '../loaders/passport'
 
 const transactionRouter = Router()
 
-const transactionController = new TransactionsController(
-  createTransactionUseCase,
-  deleteTransactionUseCase,
-  editTransactionUseCase,
-  getTransactionsUseCase
-)
-
 transactionRouter.post(
   '/',
   isAuthenticated,
   validateRequest(createTransactionRequestSchema),
-  transactionController.createTransaction
+  transactionsController.createTransaction
 )
 
 transactionRouter.delete(
   '/:id',
   isAuthenticated,
-  transactionController.deleteTransaction
+  transactionsController.deleteTransaction
 )
 
 transactionRouter.put(
   '/:id',
   isAuthenticated,
   validateRequest(editTransactionRequestSchema),
-  transactionController.editTransaction
+  transactionsController.editTransaction
 )
 
 transactionRouter.get(
   '/',
   isAuthenticated,
-  transactionController.getTransaction
+  transactionsController.getTransaction
 )
 
 export default transactionRouter

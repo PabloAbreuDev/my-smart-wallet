@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { CategoriesController } from '../controllers/categories.controller'
 import {
+  categoriesController,
   createCategoryUseCase,
   deleteCategoryUseCase,
   getCategoriesUseCase,
@@ -13,33 +14,26 @@ import { isAuthenticated } from '../loaders/passport'
 
 const categoryRouter = Router()
 
-const categoryController = new CategoriesController(
-  createCategoryUseCase,
-  updateCategoryUseCase,
-  deleteCategoryUseCase,
-  getCategoriesUseCase
-)
-
 categoryRouter.post(
   '/',
   isAuthenticated,
   validateRequest(createCategoryRequestSchema),
-  categoryController.createCategory
+  categoriesController.createCategory
 )
 
 categoryRouter.put(
   '/:id',
   isAuthenticated,
   validateRequest(updateCategoryRequestSchema),
-  categoryController.updateCategory
+  categoriesController.updateCategory
 )
 
 categoryRouter.delete(
   '/:id',
   isAuthenticated,
-  categoryController.deleteCategory
+  categoriesController.deleteCategory
 )
 
-categoryRouter.get('/', isAuthenticated, categoryController.getCategories)
+categoryRouter.get('/', isAuthenticated, categoriesController.getCategories)
 
 export default categoryRouter
